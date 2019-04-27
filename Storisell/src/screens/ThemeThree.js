@@ -1,23 +1,40 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from 'react-native';
-import {observer} from 'mobx-react/native';
+import { View, Text, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native';
+import { observer } from 'mobx-react/native';
 import GlobalStore from '../stores/GlobalStore';
+import TextModal from '../components/TextModal';
+import Gestures from 'react-native-easy-gestures';
 
 
 @observer class ThemeThree extends Component {
     state = {
-        title: GlobalStore.linkData.title.toUpperCase()
+        visible: false,
     }
+    showModal() {
+        this.setState({ visible: true });
+    }
+
     render() {
         return (
-            <TouchableOpacity activeOpacity={0.6} onPress={() => this.props.navigate('ThemeThree')} style={styles.container}>
-                <TextInput style={styles.title} value={this.state.title} onChangeText={(title) => this.setState({title: title.toUpperCase()})} />
+            <View style={styles.container}>
+                <TextModal visible={this.state.visible} parentState={this} />
+                <Gestures>
+                    <TouchableWithoutFeedback onLongPress={() => this.showModal()}>
+                        <Text style={styles.title}>
+                            {GlobalStore.linkData.title}
+                        </Text>
+                    </TouchableWithoutFeedback>
+                </Gestures>
                 <Text style={styles.sideText}>10-20% Indirim</Text>
-                <Image style={styles.image} source={{uri: GlobalStore.linkData.images[0]}} />
+                <Image style={styles.image} source={{ uri: GlobalStore.linkData.images[0] }} />
                 <View style={styles.imageBackground}></View>
-                <Text style={styles.price}>{GlobalStore.linkData.price}</Text>
-            </TouchableOpacity>
+                <Gestures>
+                    <TouchableWithoutFeedback onLongPress={() => this.showModal()}>
+                        <Text style={styles.price}>{GlobalStore.linkData.price}</Text>
+                    </TouchableWithoutFeedback>
+                </Gestures>
+            </View>
         );
     }
 }
@@ -35,7 +52,8 @@ const styles = StyleSheet.create({
         width: '70%',
         height: '60%',
         marginTop: '25%',
-        marginLeft: '10%'
+        marginLeft: '10%',
+        zIndex: -1
     },
     price: {
         fontWeight: 'bold',
@@ -64,19 +82,19 @@ const styles = StyleSheet.create({
         height: '60%',
         backgroundColor: '#f5dcd7',
         position: 'absolute',
-        zIndex: -1
+        zIndex: -2
     },
     sideText: {
-        transform: [{ rotate: '90deg'}],
+        transform: [{ rotate: '90deg' }],
         position: 'absolute',
         top: '50%',
         right: -80,
         color: '#fff',
         fontWeight: 'bold',
-       textTransform: 'uppercase',
-       fontSize: 18,
-    letterSpacing: 8,
-    zIndex: 9999
+        textTransform: 'uppercase',
+        fontSize: 18,
+        letterSpacing: 8,
+        zIndex: 9999
 
     }
 });

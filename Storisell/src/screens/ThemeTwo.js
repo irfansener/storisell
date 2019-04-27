@@ -1,24 +1,37 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native';
 import GlobalStore from '../stores/GlobalStore';
 import { observer } from 'mobx-react/native';
+import Gestures from 'react-native-easy-gestures';
+import TextModal from '../components/TextModal';
 
 
 @observer class ThemeTwo extends Component {
     state = {
-        title: GlobalStore.linkData.title.toUpperCase(),
+        visible: false,
     }
+    showModal() {
+        this.setState({ visible: true });
+    }
+
     render() {
         return (
             <View style={styles.container}>
+                <TextModal visible={this.state.visible} parentState={this} />
                 <View style={styles.imageContainer}>
                     <Image
                         source={{ uri: GlobalStore.linkData.images[0] }}
                         style={styles.image}
                     />
-                    <TextInput style={styles.title} value={this.state.title} onChangeText={(title) => this.setState({title: title.toUpperCase()})} />
-                    <Text style={styles.price}>{GlobalStore.linkData.price}</Text>
+                    <Gestures>
+                        <TouchableWithoutFeedback onLongPress={() => this.showModal()}>
+                            <Text style={styles.title}>{GlobalStore.linkData.title}</Text>
+                        </TouchableWithoutFeedback>
+                    </Gestures>
+                    <Gestures>
+                        <Text style={styles.price}>{GlobalStore.linkData.price}</Text>
+                    </Gestures>
                 </View>
             </View>
         );

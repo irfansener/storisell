@@ -1,18 +1,20 @@
 //import liraries
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, TouchableWithoutFeedback } from 'react-native';
-import {observer} from 'mobx-react/native';
+import { observer } from 'mobx-react/native';
 import GlobalStore from '../stores/GlobalStore';
 import TextModal from '../components/TextModal';
-// create a component
+import Gestures from 'react-native-easy-gestures';
+
+
 @observer class ThemeOne extends Component {
     state = {
         title: GlobalStore.linkData.title.toUpperCase(),
         visible: false
     }
     showModal() {
-        this.setState({visible: true});
-        
+        this.setState({ visible: true });
+
     }
     render() {
         return (
@@ -20,13 +22,17 @@ import TextModal from '../components/TextModal';
                 <TextModal visible={this.state.visible} parentState={this} />
                 <View style={styles.top}></View>
                 <View style={styles.center}>
-                <TouchableWithoutFeedback onLongPress={() => this.showModal()}>
-                    <Text style={styles.title}>{this.state.title}</Text>
-                </TouchableWithoutFeedback>
-                <Image style={styles.image}  source={{url: GlobalStore.linkData.images[0]}}/>
-                <View style={styles.priceWrapper}>
-                    <Text style={styles.price}>{GlobalStore.linkData.price}</Text>
-                </View>
+                    <Gestures>
+                        <TouchableWithoutFeedback onLongPress={() => this.showModal()}>
+                            <Text style={styles.title}>{this.state.title}</Text>
+                        </TouchableWithoutFeedback>
+                    </Gestures>
+                    <Image style={styles.image} source={{ url: GlobalStore.linkData.images[0] }} />
+                    <Gestures>
+                        <View style={styles.priceWrapper}>
+                            <Text style={styles.price}>{GlobalStore.linkData.price}</Text>
+                        </View>
+                    </Gestures>
                 </View>
                 <View style={styles.bottom}></View>
             </View>
@@ -55,7 +61,7 @@ const styles = StyleSheet.create({
         zIndex: 999,
         alignSelf: 'center',
         top: '10%',
-        left:'10%'
+        left: '10%'
     },
     priceWrapper: {
         backgroundColor: '#fee03f',
@@ -72,7 +78,8 @@ const styles = StyleSheet.create({
     },
     image: {
         height: '60%',
-        width: '80%'
+        width: '80%',
+        zIndex: -1,
     },
     title: {
         fontSize: 24,

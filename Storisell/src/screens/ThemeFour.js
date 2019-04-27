@@ -1,22 +1,40 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, ImageBackground, TextInput } from 'react-native';
+import { View, Text, StyleSheet, Image, ImageBackground, TouchableWithoutFeedback } from 'react-native';
 import GlobalStore from '../stores/GlobalStore';
 import { observer } from 'mobx-react/native';
+import TextModal from '../components/TextModal';
+import Gestures from 'react-native-easy-gestures';
 
 
 class ThemeFour extends Component {
     state = {
-        title: GlobalStore.linkData.title.toUpperCase()
+        visible: false,
+    }
+    showModal() {
+        this.setState({ visible: true });
     }
     render() {
         return (
             <ImageBackground source={{ uri: GlobalStore.linkData.images[0] }} style={styles.container}>
+                <TextModal visible={this.state.visible} parentState={this} />
                 <View style={styles.border}>
-                    <TextInput style={styles.title} value={this.state.title} onChangeText={(title) => this.setState({title: title.toUpperCase()})} />
-                    <Text style={styles.price}>
-                        {GlobalStore.linkData.price}
-                    </Text>
+                    <Gestures>
+                        <TouchableWithoutFeedback onLongPress={() => this.showModal()}>
+                            <Text style={styles.title}>
+                                {GlobalStore.linkData.title}
+                            </Text>
+                        </TouchableWithoutFeedback>
+                    </Gestures>
+                    <View style={styles.priceContainer}>
+                        <Gestures>
+                            <TouchableWithoutFeedback onLongPress={() => this.showModal()}>
+                                <Text style={styles.price}>
+                                    {GlobalStore.linkData.price}
+                                </Text>
+                            </TouchableWithoutFeedback>
+                        </Gestures>
+                    </View>
                 </View>
             </ImageBackground>
         );
@@ -63,6 +81,11 @@ const styles = StyleSheet.create({
         borderColor: '#fff',
         fontSize: 18
     },
+    priceContainer: {
+        bottom: 0,
+        position: 'absolute',
+        left: '35%'
+    }
 });
 
 //make this component available to the app
