@@ -9,15 +9,13 @@ import { observer } from 'mobx-react/native';
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.priceTags}>
-                    <Text style={{ color: '#fff' }}>{GlobalStore.linkData.price}</Text>
-                </View>
-                <Image
-                    source={{ uri: GlobalStore.linkData.images[0] }}
-                    style={styles.image}
-                />
-                <View style={styles.nameTag}>
-                    <Text style={{ color: '#fff' }}>{GlobalStore.linkData.title}</Text>
+                <View style={styles.imageContainer}>
+                    <Image
+                        source={{ uri: GlobalStore.linkData.images[0] }}
+                        style={styles.image}
+                    />
+                    <Text style={styles.title}>{GlobalStore.linkData.title}</Text>
+                    <Text style={styles.price}>{GlobalStore.linkData.price}</Text>
                 </View>
             </View>
         );
@@ -29,37 +27,31 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth: 3,
         width: '100%',
         height: '100%',
+        backgroundColor: '#f8d9c4'
+    },
+    imageContainer: {
+        width: '85%',
+        height: '85%',
+        padding: 10,
+        backgroundColor: '#fff',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     image: {
-        width: '90%',
-        height: '80%',
-        padding: 5,
-        borderWidth: 2,
-        borderRadius: 5,
-        borderColor: '#ddd'
+        width: '85%',
+        height: '85%',
     },
-    priceTags: {
-        position: 'absolute',
-        backgroundColor: '#4F5378',
-        top: '3%',
-        left: '8%',
-        padding: 10,
-        borderRadius: 4,
-        zIndex: 1,
-        transform: [{ rotate: '-5deg'}]
+    title: {
+        marginTop: 10,
+        fontWeight: '600',
+        fontSize: 24,
+        textTransform: 'uppercase',
     },
-    nameTag: {
-        position: 'absolute',
-        backgroundColor: '#E84326',
-        bottom: '5%',
-        right: '8%',
-        padding: 10,
-        borderRadius: 4,
-        zIndex: 1,
-        transform: [{ rotate: '-5deg'}]
+    price: {
+        marginTop: 10,
+        fontSize: 18,
     }
 });
 
