@@ -1,13 +1,24 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
+import GlobalStore from '../stores/GlobalStore';
+import { observer } from 'mobx-react/native';
 
-// create a component
-class ThemeTwo extends Component {
+
+@observer class ThemeTwo extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <Text>ThemeTwo</Text>
+                <View style={styles.priceTags}>
+                    <Text style={{ color: '#fff' }}>{GlobalStore.linkData.price}</Text>
+                </View>
+                <Image
+                    source={{ uri: GlobalStore.linkData.pictures[0] }}
+                    style={styles.image}
+                />
+                <View style={styles.nameTag}>
+                    <Text style={{ color: '#fff' }}>{GlobalStore.linkData.title}</Text>
+                </View>
             </View>
         );
     }
@@ -24,6 +35,34 @@ const styles = StyleSheet.create({
         height: '48%',
         margin: '0.5%'
     },
+    image: {
+        width: '90%',
+        height: '60%',
+        padding: 5,
+        borderWidth: 2,
+        borderRadius: 10,
+        borderColor: '#000'
+    },
+    priceTags: {
+        position: 'absolute',
+        backgroundColor: '#938D81',
+        top: '15%',
+        left: '8%',
+        padding: 10,
+        borderRadius: 4,
+        zIndex: 1,
+        transform: [{ rotate: '-5deg'}]
+    },
+    nameTag: {
+        position: 'absolute',
+        backgroundColor: '#938D81',
+        bottom: '15%',
+        right: '8%',
+        padding: 10,
+        borderRadius: 4,
+        zIndex: 1,
+        transform: [{ rotate: '-5deg'}]
+    }
 });
 
 //make this component available to the app
