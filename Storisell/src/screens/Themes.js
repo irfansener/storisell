@@ -1,14 +1,20 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Dimensions } from 'react-native';
+import ThemeOne from '../components/ThemeOne';
+import ThemeTwo from '../components/ThemeTwo';
+import ThemeThree from '../components/ThemeThree';
+import ThemeFour from '../components/ThemeFour';
 
-// create a component
 class Themes extends Component {
     render() {
         return (
-            <View style={styles.container}>
-                <Text>Themes</Text>
-            </View>
+            <ScrollView contentContainerStyle={styles.container}>
+                <ThemeOne />
+                <ThemeTwo />
+                <ThemeThree />
+                <ThemeFour />
+            </ScrollView >
         );
     }
 }
@@ -19,7 +25,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#2c3e50',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
     },
 });
 
