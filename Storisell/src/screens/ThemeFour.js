@@ -1,18 +1,19 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, ImageBackground } from 'react-native';
+import { View, Text, StyleSheet, Image, ImageBackground, TextInput } from 'react-native';
 import GlobalStore from '../stores/GlobalStore';
 import { observer } from 'mobx-react/native';
 
 
 class ThemeFour extends Component {
+    state = {
+        title: GlobalStore.linkData.title.toUpperCase()
+    }
     render() {
         return (
             <ImageBackground source={{ uri: GlobalStore.linkData.images[0] }} style={styles.container}>
                 <View style={styles.border}>
-                    <Text style={styles.title}>
-                        {GlobalStore.linkData.title}
-                    </Text>
+                    <TextInput style={styles.title} value={this.state.title} onChangeText={(title) => this.setState({title: title.toUpperCase()})} />
                     <Text style={styles.price}>
                         {GlobalStore.linkData.price}
                     </Text>

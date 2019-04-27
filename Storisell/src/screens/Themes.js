@@ -9,12 +9,12 @@ import ThemeFour from '../components/ThemeFour';
 class Themes extends Component {
     render() {
         return (
-            <ScrollView contentContainerStyle={styles.container}>
+            <View style={styles.container}>
                 <ThemeOne navigate={this.props.navigation.navigate} />
                 <ThemeTwo navigate={this.props.navigation.navigate} />
                 <ThemeThree navigate={this.props.navigation.navigate} />
                 <ThemeFour navigate={this.props.navigation.navigate} />
-            </ScrollView >
+            </View >
         );
     }
     static navigationOptions = {
@@ -26,8 +26,6 @@ class Themes extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
         flexDirection: 'row',
         flexWrap: 'wrap',
     },

@@ -26,10 +26,9 @@ import GlobalStore from '../stores/GlobalStore';
 // define your styles
 const styles = StyleSheet.create({
     container: {
-        width: '48%',
-        height: '48%',
-        margin: '0.5%',
-        position: 'relative',
+        width: '50%',
+        height: '50%',
+        backgroundColor: 'red',
     },
     top: {
         height: '50%',
@@ -56,7 +55,6 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
     price: {
-        letterSpacing: 2,
         fontSize: 12,
         textAlign: 'center',
         fontWeight: 'bold'
@@ -66,8 +64,7 @@ const styles = StyleSheet.create({
         width: '80%'
     },
     title: {
-        fontSize: 18,
-        letterSpacing: 4,
+        fontSize: 14,
         textTransform: 'uppercase',
         fontWeight: 'bold',
         padding: 10,

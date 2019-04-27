@@ -1,17 +1,20 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from 'react-native';
 import {observer} from 'mobx-react/native';
 import GlobalStore from '../stores/GlobalStore';
 
 // create a component
 @observer class ThemeOne extends Component {
+    state = {
+        title: GlobalStore.linkData.title.toUpperCase()
+    }
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.top}></View>
                 <View style={styles.center}>
-                <Text style={styles.title}>{GlobalStore.linkData.title}</Text>
+                <TextInput style={styles.title} value={this.state.title} onChangeText={(title) => this.setState({title: title.toUpperCase()})} />
                 <Image style={styles.image}  source={{url: GlobalStore.linkData.images[0]}}/>
                 <View style={styles.priceWrapper}>
                     <Text style={styles.price}>{GlobalStore.linkData.price}</Text>

@@ -27,10 +27,9 @@ class ThemeFour extends Component {
 // define your styles
 const styles = StyleSheet.create({
     container: {
-        width: '48%',
-        height: '48%',
-        margin: '0.5%',
-        borderRadius: 5
+        width: '50%',
+        height: '50%',
+        backgroundColor: 'red',
     },
     border: {
         borderWidth: 6,

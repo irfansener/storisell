@@ -25,14 +25,13 @@ import { observer } from 'mobx-react/native';
 // define your styles
 const styles = StyleSheet.create({
     container: {
-        width: '48%',
-        height: '48%',
-        margin: '0.5%',
+        width: '50%',
+        height: '50%',
+        backgroundColor: 'red',
         padding: 2,
-        borderRadius: 5,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#f8d9c4'
+        backgroundColor: '#f8d9c4',
     },
     imageContainer: {
         width: '90%',
@@ -53,7 +52,7 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
     },
     price: {
-        marginTop: 7,
+        marginTop: 5,
         fontSize: 12,
     }
 });

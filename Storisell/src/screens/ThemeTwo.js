@@ -1,11 +1,14 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TextInput } from 'react-native';
 import GlobalStore from '../stores/GlobalStore';
 import { observer } from 'mobx-react/native';
 
 
 @observer class ThemeTwo extends Component {
+    state = {
+        title: GlobalStore.linkData.title.toUpperCase()
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -14,7 +17,7 @@ import { observer } from 'mobx-react/native';
                         source={{ uri: GlobalStore.linkData.images[0] }}
                         style={styles.image}
                     />
-                    <Text style={styles.title}>{GlobalStore.linkData.title}</Text>
+                    <TextInput style={styles.title} value={this.state.title} onChangeText={(title) => this.setState({title: title.toUpperCase()})} />
                     <Text style={styles.price}>{GlobalStore.linkData.price}</Text>
                 </View>
             </View>
@@ -50,7 +53,7 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
     },
     price: {
-        marginTop: 10,
+        marginTop: 5,
         fontSize: 18,
     }
 });

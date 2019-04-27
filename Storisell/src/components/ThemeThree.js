@@ -31,13 +31,13 @@ import GlobalStore from '../stores/GlobalStore';
 // define your styles
 const styles = StyleSheet.create({
     container: {
-        width: '48%',
-        height: '48%',
-        margin: '0.5%',
+        width: '50%',
+        height: '50%',
+        backgroundColor: 'red',
         position: 'relative',
         backgroundColor: '#3926b3',
         justifyContent: 'center',
-        position: 'relative'
+        position: 'relative',
     },
     image: {
         width: '70%',

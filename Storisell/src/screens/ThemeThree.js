@@ -1,15 +1,18 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput } from 'react-native';
 import {observer} from 'mobx-react/native';
 import GlobalStore from '../stores/GlobalStore';
 
 
 @observer class ThemeThree extends Component {
+    state = {
+        title: GlobalStore.linkData.title.toUpperCase()
+    }
     render() {
         return (
             <TouchableOpacity activeOpacity={0.6} onPress={() => this.props.navigate('ThemeThree')} style={styles.container}>
-                <Text style={styles.brand}>{GlobalStore.linkData.title}</Text>
+                <TextInput style={styles.title} value={this.state.title} onChangeText={(title) => this.setState({title: title.toUpperCase()})} />
                 <Text style={styles.sideText}>10-20% Indirim</Text>
                 <Image style={styles.image} source={{uri: GlobalStore.linkData.images[0]}} />
                 <View style={styles.imageBackground}></View>
@@ -45,7 +48,7 @@ const styles = StyleSheet.create({
         letterSpacing: 5,
 
     },
-    brand: {
+    title: {
         fontWeight: 'bold',
         fontSize: 16,
         color: '#fff',
