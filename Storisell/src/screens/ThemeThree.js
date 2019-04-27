@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, TouchableWithoutFeedback, Dimensions } from 'react-native';
 import { observer } from 'mobx-react/native';
 import GlobalStore from '../stores/GlobalStore';
+import ModalStore from '../stores/ModalStore';
 import TextModal from '../components/TextModal';
 import Gestures from 'react-native-easy-gestures';
 
@@ -19,6 +20,7 @@ const window = Dimensions.get("window");
         this.setState({type}, () => {
             this.setState({visible: true})
         });
+        ModalStore.setEditTextModalVisible(true, type);
     }
 
     render() {

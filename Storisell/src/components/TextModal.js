@@ -1,26 +1,29 @@
-import React, {Component} from 'react';
-import {Modal, Text, TouchableHighlight, View, Alert, StyleSheet, TextInput, TouchableOpacity} from 'react-native';
+import React, { Component } from 'react';
+import { Modal, Text, TouchableHighlight, View, Alert, StyleSheet, TextInput, TouchableOpacity } from 'react-native';
+import { observer } from 'mobx-react/native';
+import ModalStore from '../stores/ModalStore';
 
-export default class ModalExample extends Component {
+export default @observer class ModalExample extends Component {
   state = {
     modalVisible: this.props.visible,
     text: this.props.parentState.state[this.props.parentState.state.type]
   };
-  
+
   setModalVisible(visible) {
-    this.setState({modalVisible: visible});
+    this.setState({ modalVisible: visible });
   }
   changeText = () => {
     const text = this.state.text;
-    if(text !== '') {
-      this.props.parentState.setState({visible: false, [this.props.parentState.state.type]: this.state.text})
+    if (text !== '') {
+      ModalStore.setEditTextModalVisible(false)
+      this.props.parentState.setState({ [this.props.parentState.state.type]: this.state.text })
     } else {
-      this.props.parentState.setState({visible: false})
-      this.setState({text: this.props.parentState.state[this.props.parentState.state.type]})
+      ModalStore.setEditTextModalVisible(false)
+      this.setState({ text: this.props.parentState.state[this.props.parentState.state.type] })
     }
   }
   componentWillReceiveProps(nextProps) {
-    this.setState({text: nextProps.parentState.state[this.props.parentState.state.type]})
+    this.setState({ text: nextProps.parentState.state[this.props.parentState.state.type] })
   }
   render() {
     return (
@@ -28,24 +31,24 @@ export default class ModalExample extends Component {
         <Modal
           animationType="slide"
           transparent={false}
-          visible={this.props.visible}
+          visible={ModalStore.editTextModalVisible}
           onRequestClose={() => {
             Alert.alert('Modal has been closed.');
           }}>
           <View style={styles.container}>
             <View>
               <View style={styles.header}>
-                <TouchableOpacity onPress={() => this.props.parentState.setState({visible: false})} style={styles.actionButton}>
+                <TouchableOpacity onPress={() => ModalStore.setEditTextModalVisible(false)} style={styles.actionButton}>
                   <Text style={styles.actionButtonText}>Geri</Text>
                 </TouchableOpacity >
                 <TouchableOpacity onPress={this.changeText} style={styles.actionButton}>
                   <Text style={styles.actionButtonText}>Bitti</Text>
                 </TouchableOpacity>
               </View>
-              <TextInput placeholder="Başlık Giriniz" placeholderTextColor='#3f434e' autoFocus style={styles.input} value={this.state.text} onChangeText={(text) => this.setState({text: text.toUpperCase()})} />
+              <TextInput placeholder="Başlık Giriniz" placeholderTextColor='#3f434e' autoFocus style={styles.input} value={this.state.text} onChangeText={(text) => this.setState({ text: text.toUpperCase() })} />
               <TouchableHighlight
                 onPress={() => {
-                  this.props.parentState.setState({ visible: false });
+                  ModalStore.setEditTextModalVisible(false);
                 }}>
                 <Text>Hide Modal</Text>
               </TouchableHighlight>

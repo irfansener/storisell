@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, TouchableWithoutFeedback } from 'react-native';
 import { observer } from 'mobx-react/native';
 import GlobalStore from '../stores/GlobalStore';
+import ModalStore from '../stores/ModalStore';
 import TextModal from '../components/TextModal';
 import Gestures from 'react-native-easy-gestures';
 
@@ -14,7 +15,7 @@ import Gestures from 'react-native-easy-gestures';
         type: 'title'
     }
     showModal() {
-        this.setState({ visible: true });
+        ModalStore.setEditTextModalVisible(true);
     }
     render() {
         return (

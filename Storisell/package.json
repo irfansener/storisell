@@ -13,6 +13,7 @@
     "react": "16.8.3",
     "react-native": "0.59.3",
     "react-native-easy-gestures": "^2.2.4",
+    "react-native-modal": "^10.0.0",
     "react-navigation": "2.18.3"
   },
   "devDependencies": {

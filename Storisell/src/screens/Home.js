@@ -4,8 +4,9 @@ import { View, Text, StyleSheet, Alert, Clipboard, ActivityIndicator } from 'rea
 import { Item, Input, Label, Button } from 'native-base';
 import Api from '../helper/Api';
 import GlobalStore from '../stores/GlobalStore';
+import EditModalIndex from '../components/EditModalIndex';
 
-// create a component
+
 class Home extends Component {
     state = {
         text: false,
@@ -35,12 +36,12 @@ class Home extends Component {
             Alert.alert('Error!', "Doesn't support this website. Please try again later!")
             this.setState({ loading: false })
         } else {
-            if(!data.response.images[1]){
+            if (!data.response.images[1]) {
                 data.response.images[1] = data.response.images[0];
             }
             data.response.price = data.response.price.split('TL')[0].slice(0, -1);
             data.response.price = `₺${data.response.price}`
-            data.response.title = data.response.title.slice(0,11);
+            data.response.title = data.response.title.slice(0, 11);
             GlobalStore.setLinkData(data.response);
             this.props.navigation.navigate('Themes')
             this.setState({ loading: false })
@@ -50,6 +51,7 @@ class Home extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <EditModalIndex />
                 <Item floatingLabel style={styles.input}>
                     <Label>Product Url</Label>
                     <Input
