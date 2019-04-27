@@ -26,7 +26,9 @@ import Gestures from 'react-native-easy-gestures';
                         </Text>
                     </TouchableWithoutFeedback>
                 </Gestures>
-                <Text style={styles.sideText}>10-20% Indirim</Text>
+                <TouchableWithoutFeedback onLongPress={() => this.showModal()}>
+                    <Text style={styles.sideText}>10-20% Indirim</Text>
+                </TouchableWithoutFeedback>
                 <Image style={styles.image} source={{ uri: GlobalStore.linkData.images[0] }} />
                 <View style={styles.imageBackground}></View>
                 <Gestures>
