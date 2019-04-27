@@ -16,11 +16,11 @@ import GlobalStore from '../stores/GlobalStore';
                 </View>
                 <View style={styles.imageWrapper}>
                    <Image 
-                    source={{uri: GlobalStore.linkData.pictures[0]}} 
+                    source={{uri: GlobalStore.linkData.images[0]}} 
                     style={styles.image}
                    />
                    <Image 
-                    source={{uri: GlobalStore.linkData.pictures[1]}} 
+                    source={{uri: GlobalStore.linkData.images[1]}} 
                     style={{...styles.image,position: 'absolute',top: '40%',left: '30%'}}
                    />
                    <Text style={styles.price}>{GlobalStore.linkData.price}</Text>

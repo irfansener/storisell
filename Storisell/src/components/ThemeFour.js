@@ -18,11 +18,11 @@ class ThemeFour extends Component {
                 </Text>
                 <Image
                     style={styles.imageOne}
-                    source={{ uri: GlobalStore.linkData.pictures[0] }}
+                    source={{ uri: GlobalStore.linkData.images[0] }}
                 />
                 <Image
                     style={styles.imageTwo}
-                    source={{ uri: GlobalStore.linkData.pictures[1] }}
+                    source={{ uri: GlobalStore.linkData.images[1] }}
                 />
                 <Text style={styles.title}>
                     {GlobalStore.linkData.title}

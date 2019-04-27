@@ -34,7 +34,7 @@ class Home extends Component {
             Alert.alert('Error!', "Doesn't support this website. Please try again later!")
             this.setState({ loading: false })
         } else {
-            GlobalStore.setLinkData(data);
+            GlobalStore.setLinkData(data.response);
             this.props.navigation.navigate('Themes')
             this.setState({ loading: false })
         }

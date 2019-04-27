@@ -9,7 +9,7 @@ import GlobalStore from '../stores/GlobalStore';
     render() {
         return (
             <View style={styles.container}>
-                <Image style={styles.image} source={{uri: GlobalStore.linkData.pictures[0]}} />
+                <Image style={styles.image} source={{uri: GlobalStore.linkData.images[0]}} />
                 <View style={styles.textWrapper}>
                     <Text style={styles.price}>{GlobalStore.linkData.price}</Text>
                     <Text style={styles.brand}>{GlobalStore.linkData.title}</Text>

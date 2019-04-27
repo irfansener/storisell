@@ -13,7 +13,7 @@ import { observer } from 'mobx-react/native';
                     <Text style={{ color: '#fff' }}>{GlobalStore.linkData.price}</Text>
                 </View>
                 <Image
-                    source={{ uri: GlobalStore.linkData.pictures[0] }}
+                    source={{ uri: GlobalStore.linkData.images[0] }}
                     style={styles.image}
                 />
                 <View style={styles.nameTag}>

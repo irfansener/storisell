@@ -1,13 +1,18 @@
+const SERVER_API = 'http://10.67.184.89:8080/';
+
 class Api {
     getUrlValues(url) {
-        return {
-            pictures: [
-                'https://s3.eu-central-1.amazonaws.com/shopier1/pictures_large/Camiseta1589_t-shirts1.jpg',
-                'https://s3.eu-central-1.amazonaws.com/shopier1/pictures_large/Camiseta1356_purple-t-shirt.jpg'
-            ],
-            title: 'T-shirt',
-            price: '40,00 TL'
-        }
+        let body = new FormData();
+        body.append('url', url);
+        return new Promise((resolve, reject) => {
+            fetch(SERVER_API, {
+                body,
+                method: 'POST'
+            })
+                .then(data => data.text())
+                .then(data => resolve(JSON.parse(data)))
+                .catch(data => reject(data));
+        });
     }
 }
 
