@@ -29,11 +29,14 @@ class Home extends Component {
         const { text } = this.state;
 
         this.setState({ loading: true })
-        const data = await Api.getUrlValues(text);
+        let data = await Api.getUrlValues(text);
         if (!data) {
             Alert.alert('Error!', "Doesn't support this website. Please try again later!")
             this.setState({ loading: false })
         } else {
+            if(!data.response.images[1]){
+                data.response.images[1] = data.response.images[0];
+            }
             GlobalStore.setLinkData(data.response);
             this.props.navigation.navigate('Themes')
             this.setState({ loading: false })

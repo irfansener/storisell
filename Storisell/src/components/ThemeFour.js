@@ -82,10 +82,12 @@ const styles = StyleSheet.create({
     title: {
         position: 'absolute',
         bottom: '10%',
-        left: '20%',
+        left: '1%',
         color: '#fff',
+        backgroundColor: '#DFA3A5',
         fontWeight: '600',
         fontSize: 20,
+        padding: 2,
     },
 });
 
