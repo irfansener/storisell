@@ -40,7 +40,7 @@ class Home extends Component {
             }
             data.response.price = data.response.price.split('TL')[0].slice(0, -1);
             data.response.price = `₺${data.response.price}`
-            data.response.title = data.response.title.slice(0,17);
+            data.response.title = data.response.title.slice(0,11);
             GlobalStore.setLinkData(data.response);
             this.props.navigation.navigate('Themes')
             this.setState({ loading: false })

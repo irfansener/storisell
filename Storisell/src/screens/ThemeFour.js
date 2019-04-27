@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, ImageBackground } from 'react-native';
 import GlobalStore from '../stores/GlobalStore';
 import { observer } from 'mobx-react/native';
 
@@ -8,26 +8,16 @@ import { observer } from 'mobx-react/native';
 class ThemeFour extends Component {
     render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.leftSide}>
+            <ImageBackground source={{ uri: GlobalStore.linkData.images[0] }} style={styles.container}>
+                <View style={styles.border}>
+                    <Text style={styles.title}>
+                        {GlobalStore.linkData.title}
+                    </Text>
+                    <Text style={styles.price}>
+                        {GlobalStore.linkData.price}
+                    </Text>
                 </View>
-                <View style={styles.rightSide}>
-                </View>
-                <Text style={styles.price}>
-                    {GlobalStore.linkData.price}
-                </Text>
-                <Image
-                    style={styles.imageOne}
-                    source={{ uri: GlobalStore.linkData.images[0] }}
-                />
-                <Image
-                    style={styles.imageTwo}
-                    source={{ uri: GlobalStore.linkData.images[1] }}
-                />
-                <Text style={styles.title}>
-                    {GlobalStore.linkData.title}
-                </Text>
-            </View>
+            </ImageBackground>
         );
     }
 }
@@ -41,53 +31,36 @@ const styles = StyleSheet.create({
         height: '100%',
         flexDirection: 'row',
     },
-    leftSide: {
-        backgroundColor: '#DFA3A5',
-        width: '70%',
-        height: '100%'
+    border: {
+        borderWidth: 6,
+        borderColor: '#fff',
+        width: '90%',
+        height: '80%',
     },
-    rightSide: {
-        backgroundColor: '#FFFFFF',
-        width: '30%',
-        height: '100%',
+    title: {
+        backgroundColor: '#fff',
+        color: '#000',
+        padding: 10,
+        width: '50%',
+        position: 'absolute',
+        top: 0,
+        left: '25%',
+        fontWeight: '600',
+        textAlign: 'center',
+        textTransform: 'uppercase',
+        fontSize: 20
     },
     price: {
         position: 'absolute',
-        top: '5%',
-        left: '5%',
-        color: '#fff',
-        fontWeight: '800',
-    },
-    imageOne: {
-        width: '80%',
-        height: '35%',
-        position: 'absolute',
-        top: '10%',
-        left: '5%',
-        borderWidth: 4,
-        borderColor: '#fff'
-    },
-    imageTwo: {
-        width: '60%',
-        height: '35%',
-        position: 'absolute',
-        top: '48%',
-        right: 10,
-        borderWidth: 4,
-        borderColor: '#fff',
-
-    },
-    title: {
-        position: 'absolute',
-        bottom: '6%',
-        left: '15%',
-        color: '#fff',
-        backgroundColor: '#DFA3A5',
+        bottom: 0,
+        left: '35%',
+        color: '#000',
+        backgroundColor: '#fff',
         fontWeight: '600',
         fontSize: 16,
-        padding: 5,
-        borderWidth: 3,
-        borderColor: '#fff'
+        padding: 8,
+        borderColor: '#fff',
+        fontSize: 18
     },
 });
 
