@@ -7,7 +7,7 @@ import { observer } from 'mobx-react/native';
 
 @observer class ThemeTwo extends Component {
     state = {
-        title: GlobalStore.linkData.title.toUpperCase()
+        title: GlobalStore.linkData.title.toUpperCase(),
     }
     render() {
         return (
