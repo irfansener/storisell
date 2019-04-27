@@ -1,7 +1,7 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
-import { observer } from 'mobx-react/native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import {observer} from 'mobx-react/native';
 import GlobalStore from '../stores/GlobalStore';
 
 // create a component
@@ -9,24 +9,15 @@ import GlobalStore from '../stores/GlobalStore';
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.titleWrapper}>
-                    <Text style={styles.title}>
-                        {GlobalStore.linkData.title}
-                    </Text>
+                <View style={styles.top}></View>
+                <View style={styles.center}>
+                <Text style={styles.title}>{GlobalStore.linkData.title}</Text>
+                <Image style={styles.image}  source={{url: GlobalStore.linkData.images[0]}}/>
+                <View style={styles.priceWrapper}>
+                    <Text style={styles.price}>{GlobalStore.linkData.price}</Text>
                 </View>
-                <View style={styles.imageWrapper}>
-                    <Image
-                        source={{ uri: GlobalStore.linkData.images[0] }}
-                        style={styles.image}
-                    />
-                    <Image
-                        source={{ uri: GlobalStore.linkData.images[1] }}
-                        style={{ ...styles.image, position: 'absolute', top: '40%', left: '30%' }}
-                    />
-                    <View style={styles.priceWrapper}>
-                        <Text style={styles.price}>{GlobalStore.linkData.price}</Text>
-                    </View>
                 </View>
+                <View style={styles.bottom}></View>
             </View>
         );
     }
@@ -35,49 +26,51 @@ import GlobalStore from '../stores/GlobalStore';
 // define your styles
 const styles = StyleSheet.create({
     container: {
-        width: '100%',
-        height: '100%',
-        backgroundColor: '#fff',
-    },
-    imageWrapper: {
-        width: '100%',
-        paddingTop: 7,
+        flex: 1,
         position: 'relative',
     },
-    image: {
-        width: '70%',
-        height: '80%',
-        borderWidth: 8,
-        borderColor: '#fff',
+    top: {
+        height: '50%',
+        backgroundColor: '#fff'
     },
-    price: {
-
-        fontSize: 12,
-        fontWeight: 'bold',
-        color: '#fff'
+    bottom: {
+        height: '50%',
+        backgroundColor: '#202020'
+    },
+    center: {
+        position: 'absolute',
+        width: '100%',
+        height: '100%',
+        zIndex: 999,
+        alignSelf: 'center',
+        top: '10%',
+        left:'10%'
     },
     priceWrapper: {
-        position: 'absolute',
-        top: '30%',
-        right: -5,
-        backgroundColor: '#4F5378',
-        padding: 5,
-        borderRadius: 5
+        backgroundColor: '#fee03f',
+        width: '70%',
+        marginLeft: '5%',
+        padding: 10,
+        marginTop: 10
+    },
+    price: {
+        letterSpacing: 2,
+        fontSize: 18,
+        textAlign: 'center',
+        fontWeight: 'bold'
+    },
+    image: {
+        height: '60%',
+        width: '80%'
     },
     title: {
+        fontSize: 24,
+        letterSpacing: 4,
+        textTransform: 'uppercase',
         fontWeight: 'bold',
-        fontSize: 14,
-        color: '#fff',
-        textAlign: "center",
-
-    },
-    titleWrapper: {
-        borderRadius: 5,
-        marginLeft: 10,
-        marginRight: 10,
-        padding: 5,
-        backgroundColor: '#E84326',
-        borderRadius: 5
+        padding: 10,
+        textAlign: 'center',
+        width: '80%'
     }
 });
 
