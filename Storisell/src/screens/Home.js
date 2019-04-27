@@ -30,6 +30,7 @@ class Home extends Component {
 
         this.setState({ loading: true })
         let data = await Api.getUrlValues(text);
+        console.warn(data)
         if (!data) {
             Alert.alert('Error!', "Doesn't support this website. Please try again later!")
             this.setState({ loading: false })
@@ -37,6 +38,8 @@ class Home extends Component {
             if(!data.response.images[1]){
                 data.response.images[1] = data.response.images[0];
             }
+            data.response.price = data.response.price.split('TL')[0].slice(0, -1);
+            data.response.price = `₺${data.response.price}`
             GlobalStore.setLinkData(data.response);
             this.props.navigation.navigate('Themes')
             this.setState({ loading: false })
