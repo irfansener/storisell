@@ -13,7 +13,7 @@ import { observer } from 'mobx-react/native';
                     <Text style={{ color: '#fff' }}>{GlobalStore.linkData.price}</Text>
                 </View>
                 <Image
-                    source={{ uri: GlobalStore.linkData.pictures[0] }}
+                    source={{ uri: 'https://img-trendyol.mncdn.com/mnresize/415/622/Assets/ProductImages/oa/69/5216808/2/8680651744939_2_org_zoom.jpg' }}
                     style={styles.image}
                 />
                 <View style={styles.nameTag}>
@@ -33,20 +33,21 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         width: '48%',
         height: '48%',
-        margin: '0.5%'
+        margin: '0.5%',
+        backgroundColor: '#fff'
     },
     image: {
         width: '90%',
-        height: '60%',
+        height: '80%',
         padding: 5,
         borderWidth: 2,
-        borderRadius: 10,
-        borderColor: '#000'
+        borderRadius: 5,
+        borderColor: '#ddd'
     },
     priceTags: {
         position: 'absolute',
         backgroundColor: '#938D81',
-        top: '15%',
+        top: '3%',
         left: '8%',
         padding: 10,
         borderRadius: 4,
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
     nameTag: {
         position: 'absolute',
         backgroundColor: '#938D81',
-        bottom: '15%',
+        bottom: '5%',
         right: '8%',
         padding: 10,
         borderRadius: 4,

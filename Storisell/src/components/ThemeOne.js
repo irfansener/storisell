@@ -14,12 +14,12 @@ class ThemeOne extends Component {
                 </View>
                 <View style={styles.imageWrapper}>
                    <Image 
-                    source={{uri: 'https://s3.eu-central-1.amazonaws.com/shopier1/pictures_large/Camiseta1589_t-shirts1.jpg'}} 
+                    source={{uri: 'https://img-trendyol.mncdn.com/mnresize/415/622/Assets/ProductImages/oa/69/5216808/3/8680651744939_1_org_zoom.jpg'}} 
                     style={styles.image}
                    />
                    <Image 
-                    source={{uri: 'https://s3.eu-central-1.amazonaws.com/shopier1/pictures_large/Camiseta1356_purple-t-shirt.jpg'}} 
-                    style={{...styles.image,position: 'absolute',top: '50%',left: '35%'}}
+                    source={{uri: 'https://img-trendyol.mncdn.com/mnresize/415/622/Assets/ProductImages/oa/69/5216808/2/8680651744939_2_org_zoom.jpg'}} 
+                    style={{...styles.image,position: 'absolute',top: '40%',left: '30%'}}
                    />
                    <Text style={styles.price} >19.99₺</Text>
                 </View>
@@ -45,14 +45,14 @@ const styles = StyleSheet.create({
         position: 'relative',
     },
     image: {
-        width: '65%',
-        height: '70%',
+        width: '70%',
+        height: '80%',
         borderWidth: 8,
         borderColor: '#fff',
     },
     price: {
         position: 'absolute',
-        top: '40%',
+        top: '30%',
         right: 0,
         fontSize: 14,
         fontWeight: 'bold'
