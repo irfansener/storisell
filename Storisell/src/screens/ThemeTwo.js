@@ -10,6 +10,8 @@ import TextModal from '../components/TextModal';
 @observer class ThemeTwo extends Component {
     state = {
         visible: false,
+        title: GlobalStore.linkData.title.toUpperCase(),
+        type: 'title'
     }
     showModal() {
         this.setState({ visible: true });
@@ -24,9 +26,9 @@ import TextModal from '../components/TextModal';
                         source={{ uri: GlobalStore.linkData.images[0] }}
                         style={styles.image}
                     />
-                    <Gestures>
-                        <TouchableWithoutFeedback onLongPress={() => this.showModal()}>
-                            <Text style={styles.title}>{GlobalStore.linkData.title}</Text>
+                    <Gestures style={styles.titleWrapper}>
+                        <TouchableWithoutFeedback onLongPress={() => this.showModal('title')}>
+                            <Text style={styles.title}>{this.state.title}</Text>
                         </TouchableWithoutFeedback>
                     </Gestures>
                     <Gestures>
@@ -69,6 +71,7 @@ const styles = StyleSheet.create({
         marginTop: 5,
         fontSize: 18,
     }
+
 });
 
 //make this component available to the app

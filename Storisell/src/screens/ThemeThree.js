@@ -1,38 +1,44 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableWithoutFeedback, Dimensions } from 'react-native';
 import { observer } from 'mobx-react/native';
 import GlobalStore from '../stores/GlobalStore';
 import TextModal from '../components/TextModal';
 import Gestures from 'react-native-easy-gestures';
 
+const window = Dimensions.get("window");
 
 @observer class ThemeThree extends Component {
     state = {
         visible: false,
+        title: GlobalStore.linkData.title.toUpperCase(),
+        promotion: '10-20% Indirsdsdsdim',
+        type: 'title'
     }
-    showModal() {
-        this.setState({ visible: true });
+    showModal(type) {
+        this.setState({type}, () => {
+            this.setState({visible: true})
+        });
     }
 
     render() {
         return (
             <View style={styles.container}>
                 <TextModal visible={this.state.visible} parentState={this} />
-                <Gestures>
-                    <TouchableWithoutFeedback onLongPress={() => this.showModal()}>
+                <Gestures style={styles.titleWrapper}>
+                    <TouchableWithoutFeedback onLongPress={() => this.showModal("title")}>
                         <Text style={styles.title}>
-                            {GlobalStore.linkData.title}
+                            {this.state.title}
                         </Text>
                     </TouchableWithoutFeedback>
                 </Gestures>
-                <TouchableWithoutFeedback onLongPress={() => this.showModal()}>
-                    <Text style={styles.sideText}>10-20% Indirim</Text>
+                <TouchableWithoutFeedback  onLongPress={() => this.showModal("promotion")}>
+                    <Text style={styles.sideText}>{this.state.promotion}</Text>
                 </TouchableWithoutFeedback>
                 <Image style={styles.image} source={{ uri: GlobalStore.linkData.images[0] }} />
                 <View style={styles.imageBackground}></View>
                 <Gestures>
-                    <TouchableWithoutFeedback onLongPress={() => this.showModal()}>
+                    <TouchableWithoutFeedback >
                         <Text style={styles.price}>{GlobalStore.linkData.price}</Text>
                     </TouchableWithoutFeedback>
                 </Gestures>
@@ -53,7 +59,7 @@ const styles = StyleSheet.create({
     image: {
         width: '70%',
         height: '60%',
-        marginTop: '25%',
+        marginTop: '35%',
         marginLeft: '10%',
         zIndex: -1
     },
@@ -75,9 +81,6 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         textTransform: 'uppercase',
         letterSpacing: 8,
-        marginLeft: 10,
-        position: 'absolute',
-        top: '15%'
     },
     imageBackground: {
         width: '70%',
@@ -89,15 +92,22 @@ const styles = StyleSheet.create({
     sideText: {
         transform: [{ rotate: '90deg' }],
         position: 'absolute',
+        top: 0,
+        right: '-35%',
         top: '50%',
-        right: -80,
+        fontSize: 20,
+        width: '100%',
+        height: 40,
         color: '#fff',
         fontWeight: 'bold',
-        textTransform: 'uppercase',
-        fontSize: 18,
-        letterSpacing: 8,
-        zIndex: 9999
+        letterSpacing: 5,
+        textAlign: 'center'
 
+    },
+    titleWrapper: {
+        position: 'absolute',
+        top: '15%',
+        marginLeft: 10,
     }
 });
 

@@ -4,20 +4,23 @@ import {Modal, Text, TouchableHighlight, View, Alert, StyleSheet, TextInput, Tou
 export default class ModalExample extends Component {
   state = {
     modalVisible: this.props.visible,
-    title: this.props.parentState.state.title
+    text: this.props.parentState.state[this.props.parentState.state.type]
   };
-
+  
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
   }
   changeText = () => {
-    const title = this.state.title;
-    if(title !== '') {
-      this.props.parentState.setState({visible: false, title})
+    const text = this.state.text;
+    if(text !== '') {
+      this.props.parentState.setState({visible: false, [this.props.parentState.state.type]: this.state.text})
     } else {
       this.props.parentState.setState({visible: false})
-      this.setState({title: this.props.parentState.state.title})
+      this.setState({text: this.props.parentState.state[this.props.parentState.state.type]})
     }
+  }
+  componentWillReceiveProps(nextProps) {
+    this.setState({text: nextProps.parentState.state[this.props.parentState.state.type]})
   }
   render() {
     return (
@@ -39,7 +42,7 @@ export default class ModalExample extends Component {
                   <Text style={styles.actionButtonText}>Bitti</Text>
                 </TouchableOpacity>
               </View>
-              <TextInput placeholder="Başlık Giriniz" placeholderTextColor='#3f434e' autoFocus style={styles.input} value={this.state.title} onChangeText={(title) => this.setState({title: title.toUpperCase()})} />
+              <TextInput placeholder="Başlık Giriniz" placeholderTextColor='#3f434e' autoFocus style={styles.input} value={this.state.text} onChangeText={(text) => this.setState({text: text.toUpperCase()})} />
               <TouchableHighlight
                 onPress={() => {
                   this.props.parentState.setState({ visible: false });

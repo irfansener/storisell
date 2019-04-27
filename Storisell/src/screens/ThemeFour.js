@@ -10,6 +10,8 @@ import Gestures from 'react-native-easy-gestures';
 class ThemeFour extends Component {
     state = {
         visible: false,
+        title: GlobalStore.linkData.title.toUpperCase(),
+        type: 'title'
     }
     showModal() {
         this.setState({ visible: true });
@@ -20,15 +22,15 @@ class ThemeFour extends Component {
                 <TextModal visible={this.state.visible} parentState={this} />
                 <View style={styles.border}>
                     <Gestures>
-                        <TouchableWithoutFeedback onLongPress={() => this.showModal()}>
+                        <TouchableWithoutFeedback onLongPress={() => this.showModal("title")}>
                             <Text style={styles.title}>
-                                {GlobalStore.linkData.title}
+                                {this.state.title}
                             </Text>
                         </TouchableWithoutFeedback>
                     </Gestures>
                     <View style={styles.priceContainer}>
                         <Gestures>
-                            <TouchableWithoutFeedback onLongPress={() => this.showModal()}>
+                            <TouchableWithoutFeedback >
                                 <Text style={styles.price}>
                                     {GlobalStore.linkData.price}
                                 </Text>

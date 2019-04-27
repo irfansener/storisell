@@ -10,11 +10,11 @@ import Gestures from 'react-native-easy-gestures';
 @observer class ThemeOne extends Component {
     state = {
         title: GlobalStore.linkData.title.toUpperCase(),
-        visible: false
+        visible: false,
+        type: 'title'
     }
     showModal() {
         this.setState({ visible: true });
-
     }
     render() {
         return (
@@ -23,7 +23,7 @@ import Gestures from 'react-native-easy-gestures';
                 <View style={styles.top}></View>
                 <View style={styles.center}>
                     <Gestures>
-                        <TouchableWithoutFeedback onLongPress={() => this.showModal()}>
+                        <TouchableWithoutFeedback onLongPress={() => this.showModal("title")}>
                             <Text style={styles.title}>{this.state.title}</Text>
                         </TouchableWithoutFeedback>
                     </Gestures>
