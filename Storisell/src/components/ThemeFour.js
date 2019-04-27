@@ -37,17 +37,19 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         alignItems: 'center',
-        borderColor: '#000',
-        borderWidth: 1,
+        borderColor: '#ddd',
+        borderWidth: 3,
         width: '48%',
         height: '48%',
         margin: '0.5%',
         flexDirection: 'row',
+        borderRadius: 5,
+        marginBottom: 0
     },
     leftSide: {
         backgroundColor: '#DFA3A5',
         width: '70%',
-        height: '100%',
+        height: '100%'
     },
     rightSide: {
         backgroundColor: '#FFFFFF',
@@ -63,31 +65,34 @@ const styles = StyleSheet.create({
     },
     imageOne: {
         width: '80%',
-        height: '30%',
+        height: '35%',
         position: 'absolute',
-        top: '15%',
+        top: '10%',
         left: '5%',
         borderWidth: 4,
         borderColor: '#fff'
     },
     imageTwo: {
-        width: '80%',
-        height: '30%',
+        width: '60%',
+        height: '35%',
         position: 'absolute',
         top: '48%',
-        right: 0,
+        right: 10,
         borderWidth: 4,
-        borderColor: '#fff'
+        borderColor: '#fff',
+        
     },
     title: {
         position: 'absolute',
-        bottom: '10%',
-        left: '1%',
+        bottom: '6%',
+        left: '15%',
         color: '#fff',
         backgroundColor: '#DFA3A5',
         fontWeight: '600',
-        fontSize: 20,
-        padding: 2,
+        fontSize: 16,
+        padding: 5,
+        borderWidth: 3,
+        borderColor: '#fff'
     },
 });
 

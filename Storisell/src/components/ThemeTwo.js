@@ -29,12 +29,13 @@ const styles = StyleSheet.create({
     container: {
         justifyContent: 'center',
         alignItems: 'center',
-        borderColor: '#000',
-        borderWidth: 1,
+        borderColor: '#ddd',
+        borderWidth: 3,
         width: '48%',
         height: '48%',
         margin: '0.5%',
-        backgroundColor: '#fff'
+        backgroundColor: '#fff',
+        borderRadius: 5
     },
     image: {
         width: '90%',
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
     },
     priceTags: {
         position: 'absolute',
-        backgroundColor: '#938D81',
+        backgroundColor: '#4F5378',
         top: '3%',
         left: '8%',
         padding: 10,
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
     },
     nameTag: {
         position: 'absolute',
-        backgroundColor: '#938D81',
+        backgroundColor: '#E84326',
         bottom: '5%',
         right: '8%',
         padding: 10,
