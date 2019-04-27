@@ -10,12 +10,15 @@ class Themes extends Component {
     render() {
         return (
             <ScrollView contentContainerStyle={styles.container}>
-                <ThemeOne />
-                <ThemeTwo />
-                <ThemeThree />
-                <ThemeFour />
+                <ThemeOne navigate={this.props.navigation.navigate} />
+                <ThemeTwo navigate={this.props.navigation.navigate} />
+                <ThemeThree navigate={this.props.navigation.navigate} />
+                <ThemeFour navigate={this.props.navigation.navigate} />
             </ScrollView >
         );
+    }
+    static navigationOptions = {
+        title: 'Themes'
     }
 }
 

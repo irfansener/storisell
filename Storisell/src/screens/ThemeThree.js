@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import {observer} from 'mobx-react/native';
 import GlobalStore from '../stores/GlobalStore';
 
@@ -8,14 +8,14 @@ import GlobalStore from '../stores/GlobalStore';
 @observer class ThemeThree extends Component {
     render() {
         return (
-            <TouchableOpacity activeOpacity={0.6} onPress={() => this.props.navigate('ThemeThree')} style={styles.container}>
+            <View style={styles.container}>
                 <Image style={styles.image} source={{uri: GlobalStore.linkData.images[0]}} />
                 <View style={styles.textWrapper}>
                     <Text style={styles.brand}>{GlobalStore.linkData.title}</Text>
                     <Text style={styles.brand}>{GlobalStore.linkData.price}</Text>
 
                 </View>
-            </TouchableOpacity>
+            </View>
         );
     }
 }
@@ -24,13 +24,9 @@ import GlobalStore from '../stores/GlobalStore';
 const styles = StyleSheet.create({
     container: {
         borderColor: '#ddd',
-        borderWidth: 3,
-        width: '48%',
-        height: '48%',
-        margin: '0.5%',
+        width: '100%',
+        height: '100%',
         position: 'relative',
-        borderRadius: 5,
-        marginBottom: 0
     },
     image: {
         width: '100%',
