@@ -12,6 +12,7 @@
     "native-base": "^2.12.1",
     "react": "16.8.3",
     "react-native": "0.59.3",
+    "react-native-easy-gestures": "^2.2.4",
     "react-navigation": "2.18.3"
   },
   "devDependencies": {
