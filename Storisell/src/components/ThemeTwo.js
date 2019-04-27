@@ -13,7 +13,7 @@ import { observer } from 'mobx-react/native';
                     <Text style={{ color: '#fff' }}>{GlobalStore.linkData.price}</Text>
                 </View>
                 <Image
-                    source={{ uri: 'https://img-trendyol.mncdn.com/mnresize/415/622/Assets/ProductImages/oa/69/5216808/2/8680651744939_2_org_zoom.jpg' }}
+                    source={{ uri: GlobalStore.linkData.pictures[0] }}
                     style={styles.image}
                 />
                 <View style={styles.nameTag}>

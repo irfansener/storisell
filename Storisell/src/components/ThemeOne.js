@@ -1,27 +1,29 @@
 //import liraries
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
+import {observer} from 'mobx-react/native';
+import GlobalStore from '../stores/GlobalStore';
 
 // create a component
-class ThemeOne extends Component {
+@observer class ThemeOne extends Component {
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.titleWrapper}>
                     <Text style={styles.title}>
-                       MOR T-SHIRT ERKEK
+                       {GlobalStore.linkData.title}
                     </Text>
                 </View>
                 <View style={styles.imageWrapper}>
                    <Image 
-                    source={{uri: 'https://img-trendyol.mncdn.com/mnresize/415/622/Assets/ProductImages/oa/69/5216808/3/8680651744939_1_org_zoom.jpg'}} 
+                    source={{uri: GlobalStore.linkData.pictures[0]}} 
                     style={styles.image}
                    />
                    <Image 
-                    source={{uri: 'https://img-trendyol.mncdn.com/mnresize/415/622/Assets/ProductImages/oa/69/5216808/2/8680651744939_2_org_zoom.jpg'}} 
+                    source={{uri: GlobalStore.linkData.pictures[1]}} 
                     style={{...styles.image,position: 'absolute',top: '40%',left: '30%'}}
                    />
-                   <Text style={styles.price} >19.99₺</Text>
+                   <Text style={styles.price}>{GlobalStore.linkData.price}</Text>
                 </View>
             </View>
         );
