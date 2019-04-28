@@ -146,7 +146,7 @@ func praseIyziLink(url string) (Product, string) {
 	var product Product
 	price := doc.Find(".price").Text()
 	product.Title = doc.Find(".product-detail h2").Text()
-	product.Price = strings.Split(price, " ")[0]
+	product.Price = strings.Split(price, " ")[0] + " "
 
 	val, exist := doc.Find(".product-image").Attr("style")
 	firstParse := strings.Split(val, "url(")[1]
