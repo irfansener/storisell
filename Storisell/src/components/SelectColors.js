@@ -37,10 +37,10 @@ import { COLORS } from '../helper/CONSTANT';
                 <View style={styles.container}>
                     <View style={styles.header}>
                         <TouchableOpacity onPress={() => { this.select(null, null); ModalStore.setSelectedColorModalVisible(false) }}>
-                            <Icon style={styles.checkIcon} type='Ionicons' name='md-close' />
+                            <Icon style={styles.checkIcon} type='Ionicons' name='md-close-circle' />
                         </TouchableOpacity>
                         <TouchableOpacity onPress={() => ModalStore.setSelectedColorModalVisible(false)}>
-                            <Icon style={styles.checkIcon} type='FontAwesome5' name='check' />
+                            <Icon style={styles.checkIcon} type='Ionicons' name='md-checkmark-circle' />
                         </TouchableOpacity>
                     </View>
                     <FlatList
@@ -91,8 +91,9 @@ const styles = StyleSheet.create({
         fontSize: 21
     },
     checkIcon: {
-        fontSize: 24,
-        padding: 10
+        fontSize: 28,
+        padding: 10,
+        color: '#ddd'
     }
 });
 

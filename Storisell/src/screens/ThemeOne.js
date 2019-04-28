@@ -74,7 +74,7 @@ import { Root, ActionSheet, Icon } from 'native-base';
                     <View style={styles.top}></View>
                     <View style={styles.center}>
                         <Gestures>
-                            <TouchableWithoutFeedback onLongPress={() => this.showModal("title")}>
+                            <TouchableWithoutFeedback onLongPress={() => this.showModal("title")} delayLongPress="300">
                                 <Text style={[styles.title, this.state.font && { fontFamily: this.state.font }, this.state.color && { color: this.state.color }]}>{this.state.title}</Text>
                             </TouchableWithoutFeedback>
                         </Gestures>
