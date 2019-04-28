@@ -6,6 +6,7 @@ import ModalStore from '../stores/ModalStore';
 import { observer } from 'mobx-react/native';
 import TextModal from '../components/TextModal';
 import SelectFonts from '../components/SelectFonts';
+import SelectColors from '../components/SelectColors';
 import Gestures from 'react-native-easy-gestures';
 
 
@@ -15,6 +16,7 @@ class ThemeFour extends Component {
         title: GlobalStore.linkData.title.toUpperCase(),
         type: 'title',
         font: null,
+        color: null
     }
     showModal() {
         ModalStore.setEditModalVisible(true);
@@ -24,10 +26,11 @@ class ThemeFour extends Component {
             <ImageBackground source={{ uri: GlobalStore.linkData.images[0] }} style={styles.container}>
                 <TextModal visible={this.state.visible} parentState={this} />
                 <SelectFonts parentState={this} />
+                <SelectColors parentState={this} />
                 <View style={styles.border}>
                     <Gestures>
                         <TouchableWithoutFeedback onLongPress={() => this.showModal("title")}>
-                            <Text style={[styles.title, this.state.font && { fontFamily: this.state.font }]}>
+                            <Text style={[styles.title, this.state.font && { fontFamily: this.state.font }, this.state.color && { color: this.state.color }]}>
                                 {this.state.title}
                             </Text>
                         </TouchableWithoutFeedback>
@@ -35,7 +38,7 @@ class ThemeFour extends Component {
                     <View style={styles.priceContainer}>
                         <Gestures>
                             <TouchableWithoutFeedback >
-                                <Text style={[styles.price, this.state.font && { fontFamily: this.state.font }]}>
+                                <Text style={[styles.price, this.state.font && { fontFamily: this.state.font }, this.state.color && { color: this.state.color }]}>
                                     {GlobalStore.linkData.price}
                                 </Text>
                             </TouchableWithoutFeedback>

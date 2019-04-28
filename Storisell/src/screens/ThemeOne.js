@@ -7,6 +7,7 @@ import ModalStore from '../stores/ModalStore';
 import TextModal from '../components/TextModal';
 import Gestures from 'react-native-easy-gestures';
 import SelectFonts from '../components/SelectFonts';
+import SelectColors from '../components/SelectColors';
 
 
 @observer class ThemeOne extends Component {
@@ -14,7 +15,8 @@ import SelectFonts from '../components/SelectFonts';
         title: GlobalStore.linkData.title.toUpperCase(),
         visible: false,
         type: 'title',
-        font: null
+        font: null,
+        color: null
     }
     showModal() {
         ModalStore.setEditModalVisible(true);
@@ -24,17 +26,18 @@ import SelectFonts from '../components/SelectFonts';
             <View style={styles.container}>
                 <TextModal visible={this.state.visible} parentState={this} />
                 <SelectFonts parentState={this} />
+                <SelectColors parentState={this} />
                 <View style={styles.top}></View>
                 <View style={styles.center}>
                     <Gestures>
                         <TouchableWithoutFeedback onLongPress={() => this.showModal("title")}>
-                            <Text style={[styles.title, this.state.font && { fontFamily: this.state.font }]}>{this.state.title}</Text>
+                            <Text style={[styles.title, this.state.font && { fontFamily: this.state.font }, this.state.color && { color: this.state.color }]}>{this.state.title}</Text>
                         </TouchableWithoutFeedback>
                     </Gestures>
                     <Image style={styles.image} source={{ url: GlobalStore.linkData.images[0] }} />
                     <Gestures>
                         <View style={styles.priceWrapper}>
-                            <Text style={[styles.price, this.state.font && { fontFamily: this.state.font }]}>{GlobalStore.linkData.price}</Text>
+                            <Text style={[styles.price, this.state.font && { fontFamily: this.state.font }, this.state.color && { color: this.state.color }]}>{GlobalStore.linkData.price}</Text>
                         </View>
                     </Gestures>
                 </View>

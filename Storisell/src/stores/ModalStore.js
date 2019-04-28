@@ -5,6 +5,7 @@ class GlobalStore {
     @observable editTextModalVisible = false;
     @observable editTextModalKey = null;
     @observable selectedFontModalVisible = false;
+    @observable selectedColorModalVisible = false;
 
     setEditModalVisible(value, key = null) {
         this.editModalVisible = value;
@@ -18,6 +19,9 @@ class GlobalStore {
     }
     setSelectedFontModalVisible(value) {
         this.selectedFontModalVisible = value;
+    }
+    setSelectedColorModalVisible(value) {
+        this.selectedColorModalVisible = value;
     }
 }
 

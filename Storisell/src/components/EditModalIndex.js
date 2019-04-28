@@ -20,6 +20,12 @@ import { Icon } from 'native-base';
             ModalStore.setSelectedFontModalVisible(true);
         }, 500);
     }
+    openColorModal = () => {
+        ModalStore.setEditModalVisible(false);
+        setTimeout(() => {
+            ModalStore.setSelectedColorModalVisible(true);
+        }, 500);
+    }
     render() {
         return (
             <Modal
@@ -39,7 +45,7 @@ import { Icon } from 'native-base';
                         <Icon type='FontAwesome5' style={styles.icon} name='font' />
                         <Text style={styles.itemText}>Fonts</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.itemContainer} onPress={this.openTextModal}>
+                    <TouchableOpacity style={styles.itemContainer} onPress={this.openColorModal}>
                         <Icon type='FontAwesome5' style={styles.icon} name='tint' />
                         <Text style={styles.itemText}>Colors</Text>
                     </TouchableOpacity>

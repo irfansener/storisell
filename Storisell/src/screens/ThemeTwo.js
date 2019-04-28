@@ -7,6 +7,7 @@ import { observer } from 'mobx-react/native';
 import Gestures from 'react-native-easy-gestures';
 import TextModal from '../components/TextModal';
 import SelectFonts from '../components/SelectFonts';
+import SelectColors from '../components/SelectColors';
 
 
 @observer class ThemeTwo extends Component {
@@ -14,7 +15,8 @@ import SelectFonts from '../components/SelectFonts';
         visible: false,
         title: GlobalStore.linkData.title.toUpperCase(),
         type: 'title',
-        font: null
+        font: null,
+        color: null
     }
     showModal() {
         this.setState({ visible: true });
@@ -26,6 +28,7 @@ import SelectFonts from '../components/SelectFonts';
             <View style={styles.container}>
                 <TextModal visible={this.state.visible} parentState={this} />
                 <SelectFonts parentState={this} />
+                <SelectColors parentState={this} />
                 <View style={styles.imageContainer}>
                     <Image
                         source={{ uri: GlobalStore.linkData.images[0] }}
@@ -33,11 +36,11 @@ import SelectFonts from '../components/SelectFonts';
                     />
                     <Gestures style={styles.titleWrapper}>
                         <TouchableWithoutFeedback onLongPress={() => this.showModal('title')}>
-                            <Text style={[styles.title, this.state.font && { fontFamily: this.state.font }]}>{this.state.title}</Text>
+                            <Text style={[styles.title, this.state.font && { fontFamily: this.state.font }, this.state.color && { color: this.state.color }]}>{this.state.title}</Text>
                         </TouchableWithoutFeedback>
                     </Gestures>
                     <Gestures>
-                        <Text style={[styles.price, this.state.font && { fontFamily: this.state.font }]}>{GlobalStore.linkData.price}</Text>
+                        <Text style={[styles.price, this.state.font && { fontFamily: this.state.font }, this.state.color && { color: this.state.color }]}>{GlobalStore.linkData.price}</Text>
                     </Gestures>
                 </View>
             </View>

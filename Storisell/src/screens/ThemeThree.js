@@ -7,6 +7,7 @@ import ModalStore from '../stores/ModalStore';
 import TextModal from '../components/TextModal';
 import Gestures from 'react-native-easy-gestures';
 import SelectFonts from '../components/SelectFonts';
+import SelectColors from '../components/SelectColors';
 
 const window = Dimensions.get("window");
 
@@ -16,7 +17,8 @@ const window = Dimensions.get("window");
         title: GlobalStore.linkData.title.toUpperCase(),
         promotion: '10-20% Indirsdsdsdim',
         type: 'title',
-        font: null
+        font: null,
+        color: null
     }
     showModal(type) {
         this.setState({ type }, () => {
@@ -30,21 +32,22 @@ const window = Dimensions.get("window");
             <View style={styles.container}>
                 <TextModal visible={this.state.visible} parentState={this} />
                 <SelectFonts parentState={this} />
+                <SelectColors parentState={this} />
                 <Gestures style={styles.titleWrapper}>
                     <TouchableWithoutFeedback onLongPress={() => this.showModal("title")}>
-                        <Text style={[styles.title, this.state.font && { fontFamily: this.state.font }]}>
+                        <Text style={[styles.title, this.state.font && { fontFamily: this.state.font }, this.state.color && { color: this.state.color }]}>
                             {this.state.title}
                         </Text>
                     </TouchableWithoutFeedback>
                 </Gestures>
                 <TouchableWithoutFeedback onLongPress={() => this.showModal("promotion")}>
-                    <Text style={[styles.sideText, this.state.font && { fontFamily: this.state.font }]}>{this.state.promotion}</Text>
+                    <Text style={[styles.sideText, this.state.font && { fontFamily: this.state.font }, this.state.color && { color: this.state.color }]}>{this.state.promotion}</Text>
                 </TouchableWithoutFeedback>
                 <Image style={styles.image} source={{ uri: GlobalStore.linkData.images[0] }} />
                 <View style={styles.imageBackground}></View>
                 <Gestures>
                     <TouchableWithoutFeedback >
-                        <Text style={[styles.price, this.state.font && { fontFamily: this.state.font }]}>{GlobalStore.linkData.price}</Text>
+                        <Text style={[styles.price, this.state.font && { fontFamily: this.state.font }, this.state.color && { color: this.state.color }]}>{GlobalStore.linkData.price}</Text>
                     </TouchableWithoutFeedback>
                 </Gestures>
             </View>
