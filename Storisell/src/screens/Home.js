@@ -14,7 +14,6 @@ class Home extends Component {
     }
 
     async componentDidMount() {
-        AppState.addEventListener('change', this._handleAppStateChange);
         const clipboardData = await Clipboard.getString();
         const expression = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
         const regex = new RegExp(expression)
@@ -25,29 +24,6 @@ class Home extends Component {
                     { text: 'No, thanks!', onPress: () => console.log('..') }
                 ])
         }
-    }
-
-    _handleAppStateChange = async (nextAppState) => {
-        if (
-            this.state.appState !== 'active' &&
-            nextAppState === 'active'
-        ) {
-            const clipboardData = await Clipboard.getString();
-            const expression = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
-            const regex = new RegExp(expression)
-            if (clipboardData.match(regex)) {
-                Alert.alert('Info', `You copy this url \n ${clipboardData} \n Do you want to paste it ?`,
-                    [
-                        { text: 'Yes, please!', onPress: () => this.pasteButtonPress(clipboardData) },
-                        { text: 'No, thanks!', onPress: () => console.log('..') }
-                    ])
-            }
-        }
-        this.setState({ appState: nextAppState });
-    }
-
-    componentWillUnmount() {
-        AppState.removeEventListener('change', this._handleAppStateChange);
     }
 
     buttonPress = async () => {
