@@ -36,6 +36,7 @@
 		815043A971904B4CB585D7DE /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A527E6D86DC34700AF8B9B9A /* FontAwesome5_Solid.ttf */; };
 		82854559AAE7450AA8FF8E7B /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5CA3D9F4FDF4BAB9B4E8743 /* Entypo.ttf */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		85A2402A2275A3DE0049A268 /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 85A240292275A3D50049A268 /* libRCTCameraRoll.a */; };
 		868D7F42448F46D6A5DE62A0 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F825030EFD754CDFBF64DFC6 /* EvilIcons.ttf */; };
 		919C0447F9A04DBD9F48AE37 /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9C61A5787BA4D23A093ECE3 /* Roboto.ttf */; };
 		AA2BD7F618D14B25AE59B903 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C3565ECDD424B06B42B7695 /* AntDesign.ttf */; };
@@ -43,7 +44,6 @@
 		BB1BC2795F214018B888C3FF /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 47BCE4263B9F4F0E985D2E88 /* FontAwesome5_Brands.ttf */; };
 		ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED297162215061F000B7C4FE /* JavaScriptCore.framework */; };
 		ED32CDD67F2B4FE387DEE638 /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24639E9A172B436786995DCC /* Zocial.ttf */; };
-		F191E306227567CF008547ED /* libRCTCameraRoll.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F191E30522756798008547ED /* libRCTCameraRoll.a */; };
 		F322813927504896AE6A9413 /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 20399DB2967A41F2A6649075 /* Roboto_medium.ttf */; };
 /* End PBXBuildFile section */
 
@@ -286,6 +286,13 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+		85A240282275A3D50049A268 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 85A240242275A3D50049A268 /* RCTCameraRoll.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 58B5115D1A9E6B3D00147676;
+			remoteInfo = RCTCameraRoll;
+		};
 		ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */;
@@ -363,6 +370,7 @@
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
 		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
 		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		85A240242275A3D50049A268 /* RCTCameraRoll.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTCameraRoll.xcodeproj; path = "../../../Bank/node_modules/react-native/Libraries/CameraRoll/RCTCameraRoll.xcodeproj"; sourceTree = "<group>"; };
 		9CEB7FD906D341FBBDEC8483 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/native-base/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		A527E6D86DC34700AF8B9B9A /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
@@ -384,6 +392,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85A2402A2275A3DE0049A268 /* libRCTCameraRoll.a in Frameworks */,
 				15AD69D822756B9300F86A44 /* libRNViewShot.a in Frameworks */,
 				15AD69D722756B8F00F86A44 /* libRNShare.a in Frameworks */,
 				ED297163215061F000B7C4FE /* JavaScriptCore.framework in Frameworks */,
@@ -576,6 +585,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				85A240242275A3D50049A268 /* RCTCameraRoll.xcodeproj */,
 				15AD69D122756B8800F86A44 /* RNViewShot.xcodeproj */,
 				15AD69CB22756B6F00F86A44 /* RNShare.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
@@ -622,6 +632,14 @@
 			isa = PBXGroup;
 			children = (
 				13B07F961A680F5B00A75B9A /* Storisell.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		85A240252275A3D50049A268 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				85A240292275A3D50049A268 /* libRCTCameraRoll.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -711,6 +729,10 @@
 				{
 					ProductGroup = ADBDB9201DFEBF0600ED6528 /* Products */;
 					ProjectRef = ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */;
+				},
+				{
+					ProductGroup = 85A240252275A3D50049A268 /* Products */;
+					ProjectRef = 85A240242275A3D50049A268 /* RCTCameraRoll.xcodeproj */;
 				},
 				{
 					ProductGroup = F191E30122756798008547ED /* Products */;
@@ -1005,6 +1027,13 @@
 			fileType = archive.ar;
 			path = libRCTText.a;
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		85A240292275A3D50049A268 /* libRCTCameraRoll.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTCameraRoll.a;
+			remoteRef = 85A240282275A3D50049A268 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */ = {

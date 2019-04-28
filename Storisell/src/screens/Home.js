@@ -29,6 +29,7 @@ class Home extends Component {
 
     _handleAppStateChange = async (nextAppState) => {
         if (
+            this.state.appState !== 'active' &&
             nextAppState === 'active'
         ) {
             const clipboardData = await Clipboard.getString();

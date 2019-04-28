@@ -61,6 +61,7 @@ import { Root, ActionSheet, Icon } from 'native-base';
     }
     save = () => {
         this.refs.viewShot.capture().then(async (uri) => {
+            console.warn(uri)
             CameraRoll.saveToCameraRoll(uri);
             Alert.alert('Done!', 'Your story has been saved with successfully!');
         });
