@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
     checkIcon: {
         fontSize: 28,
         padding: 10,
-        color: '#fff'
+        color: '#ddd'
     }
 });
 

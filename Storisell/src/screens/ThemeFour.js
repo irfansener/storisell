@@ -75,7 +75,7 @@ class ThemeFour extends Component {
                         <SelectColors parentState={this} />
                         <View style={styles.border}>
                             <Gestures>
-                                <TouchableWithoutFeedback onLongPress={() => this.showModal("title")}>
+                                <TouchableWithoutFeedback onLongPress={() => this.showModal("title")} delayLongPress="300">
                                     <Text style={[styles.title, this.state.font && { fontFamily: this.state.font }, this.state.color && { color: this.state.color }]}>
                                         {this.state.title}
                                     </Text>
@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         color: '#000',
         padding: 10,
-        width: '55%',
+        width: '50%',
         position: 'absolute',
         top: 0,
         left: '25%',
@@ -149,21 +149,19 @@ const styles = StyleSheet.create({
         fontSize: 20
     },
     price: {
-        position: 'absolute',
         bottom: 0,
-        left: '35%',
         color: '#000',
-        backgroundColor: '#fff',
         fontWeight: '600',
-        padding: 8,
-        borderColor: '#fff',
-        fontSize: 18
+        fontSize: 18,
+        textAlign: 'center'
     },
     priceContainer: {
         bottom: 0,
         position: 'absolute',
-        left: '40%',
-        width: '20%'
+        left: '30%',
+        width: '40%',
+        padding: 8,
+        backgroundColor: '#fff',
     }
 });
 
