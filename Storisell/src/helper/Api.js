@@ -1,4 +1,4 @@
-const SERVER_API = 'http://10.67.184.89:8080/';
+const SERVER_API = 'http://209.97.140.0:8080/';
 
 class Api {
     getUrlValues(url) {

@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Alert, Clipboard, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, Alert, Clipboard, ActivityIndicator, Image } from 'react-native';
 import { Item, Input, Label, Button } from 'native-base';
 import Api from '../helper/Api';
 import GlobalStore from '../stores/GlobalStore';
@@ -31,7 +31,6 @@ class Home extends Component {
 
         this.setState({ loading: true })
         let data = await Api.getUrlValues(text);
-        console.warn(data)
         if (!data) {
             Alert.alert('Error!', "Doesn't support this website. Please try again later!")
             this.setState({ loading: false })
@@ -52,15 +51,20 @@ class Home extends Component {
         return (
             <View style={styles.container}>
                 <EditModalIndex />
+                <Image style={styles.image} source={{uri: 'https://im4.ezgif.com/tmp/ezgif-4-d676c93862e3.png'}} />
+                <Text style={styles.title}>
+                    Link to Story
+                </Text>
                 <Item floatingLabel style={styles.input}>
-                    <Label>Product Url</Label>
+                    <Label style={styles.label}>PRODUCT URL</Label>
                     <Input
                         value={this.state.text}
+                        style={{color: '#fff'}}
                         onChangeText={text => this.setState({ text })}
                     />
                 </Item>
                 <Button disabled={!this.state.text || this.state.loading} style={styles.button} onPress={this.buttonPress}>
-                    <Text style={{ color: '#fff' }}> Create Story Themes </Text>
+                    <Text style={{ color: '#3f3c56',textTransform: 'uppercase' }}> Create Story </Text>
                     {this.state.loading &&
                         <ActivityIndicator color='#000' style={{ marginLeft: 10, marginRight: 10 }} />}
                 </Button>
@@ -68,7 +72,8 @@ class Home extends Component {
         );
     }
     static navigationOptions = {
-        title: 'Home'
+        title: 'Home',
+        header: null
     }
 }
 
@@ -78,17 +83,41 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#fff'
+        backgroundColor: '#e16262',
+        color: '#fff'
     },
     input: {
         width: '80%',
+        color: '#fff',
+        borderWidth: 1,
+        borderColor: '#fff'
     },
     button: {
         alignSelf: 'center',
         margin: 20,
         padding: 10,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        width: '80%',
+        backgroundColor: '#fff',
+        fontSize: 20
+    },
+    label: {
+        color: '#fff',
+        fontSize: 12
+    },
+    title: {
+        color: '#fff',
+        fontWeight: 'bold',
+        fontSize: 32,
+        textTransform: 'uppercase',
+        marginBottom: 20
+    },
+    image: {
+        width: 250,
+        height: 250,
+        borderRadius: 125,
+        marginBottom: 40
     }
 });
 

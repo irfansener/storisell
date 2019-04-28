@@ -56,7 +56,6 @@ class ThemeFour extends Component {
                 subject: "Share Link" //  for email
             };
             Share.open(shareImage)
-            console.log("do something with ", uri);
         });
     }
     save = () => {
@@ -99,10 +98,24 @@ class ThemeFour extends Component {
     }
     static navigationOptions = ({ navigation }) => {
         return {
-            headerRight:
-                <TouchableOpacity style={{ paddingRight: 8, alignItems: 'center', justifyContent: 'center', }} onPress={navigation.getParam('tap')}>
-                    <Icon type='MaterialCommunityIcons' name='check' style={{ fontSize: 32 }} />
+            title: 'Choose Template',
+            headerStyle: {
+                backgroundColor: '#e16262',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+                fontWeight: 'bold',
+            },
+            headerLeft: (
+                <TouchableOpacity style={{ alignItems: 'center', justifyContent: 'center', }} onPress={() => navigation.goBack()}>
+                    <Icon type='Ionicons' name='arrow-back' style={{ fontSize: 32, color: "#fff", marginLeft: 10 }} />
                 </TouchableOpacity>
+            ),
+            headerRight:(
+                <TouchableOpacity style={{ alignItems:'center', justifyContent: 'center', }} onPress={() => navigation.getParam('tap')}>
+                    <Icon type='MaterialCommunityIcons' name='check' style={{ fontSize: 32, color: "#fff", marginRight: 10 }}/>
+                </TouchableOpacity> 
+            )
         }
     }
 }

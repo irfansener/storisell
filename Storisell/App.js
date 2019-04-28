@@ -8,8 +8,8 @@ import { createStackNavigator } from 'react-navigation';
 
 const App = createStackNavigator(
     {
-        Themes,
         Home,
+        Themes,
         ThemeOne,
         ThemeTwo,
         ThemeThree,
