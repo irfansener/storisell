@@ -82,14 +82,12 @@ class ThemeFour extends Component {
                                 </TouchableWithoutFeedback>
                             </Gestures>
                             <View style={styles.priceContainer}>
-                                <Gestures>
-                                    <TouchableWithoutFeedback >
-                                        <Text style={[styles.price, this.state.font && { fontFamily: this.state.font }, this.state.color && { color: this.state.color }]}>
-                                            {GlobalStore.linkData.price}
-                                        </Text>
-                                    </TouchableWithoutFeedback>
-                                </Gestures>
-                            </View>
+                            <Gestures>
+                                <Text style={[styles.price, this.state.font && { fontFamily: this.state.font }, this.state.color && { color: this.state.color }]}>
+                                    {GlobalStore.linkData.price}
+                                </Text>
+                            </Gestures></View>
+
                         </View>
                     </ImageBackground>
                 </ViewShot>
@@ -153,15 +151,17 @@ const styles = StyleSheet.create({
         color: '#000',
         fontWeight: '600',
         fontSize: 18,
-        textAlign: 'center'
-    },
-    priceContainer: {
-        bottom: 0,
-        position: 'absolute',
-        left: '30%',
-        width: '40%',
-        padding: 8,
+        textAlign: 'center',
+        width: '30%',
+        left: '35%',
         backgroundColor: '#fff',
+        padding: 10
+    },
+
+    priceContainer: {
+        position: 'absolute',
+        width: '100%',
+        bottom: 0,
     }
 });
 
