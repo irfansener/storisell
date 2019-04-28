@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, ScrollView, Dimensions, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, KeyboardAvoidingView, Dimensions, TouchableOpacity } from 'react-native';
 import ThemeOne from '../components/ThemeOne';
 import ThemeTwo from '../components/ThemeTwo';
 import ThemeThree from '../components/ThemeThree';

@@ -109,7 +109,7 @@ import { Root, ActionSheet, Icon } from 'native-base';
                 </TouchableOpacity>
             ),
             headerRight:(
-                <TouchableOpacity style={{ alignItems:'center', justifyContent: 'center', }} onPress={() => navigation.getParam('tap')}>
+                <TouchableOpacity style={{ alignItems:'center', justifyContent: 'center', }} onPress={navigation.getParam('tap')}>
                     <Icon type='MaterialCommunityIcons' name='check' style={{ fontSize: 32, color: "#fff", marginRight: 10 }}/>
                 </TouchableOpacity> 
             )

@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Alert, Clipboard, ActivityIndicator, Image } from 'react-native';
+import { View, Text, StyleSheet, Alert, Clipboard, ActivityIndicator, Image, KeyboardAvoidingView } from 'react-native';
 import { Item, Input, Label, Button } from 'native-base';
 import Api from '../helper/Api';
 import GlobalStore from '../stores/GlobalStore';
@@ -49,7 +49,7 @@ class Home extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
+            <KeyboardAvoidingView style={styles.container} behavior='padding'>
                 <EditModalIndex />
                 <Image style={styles.image} source={{uri: 'https://im4.ezgif.com/tmp/ezgif-4-d676c93862e3.png'}} />
                 <Text style={styles.title}>
@@ -68,7 +68,7 @@ class Home extends Component {
                     {this.state.loading &&
                         <ActivityIndicator color='#000' style={{ marginLeft: 10, marginRight: 10 }} />}
                 </Button>
-            </View>
+            </KeyboardAvoidingView>
         );
     }
     static navigationOptions = {
@@ -117,7 +117,8 @@ const styles = StyleSheet.create({
         width: 250,
         height: 250,
         borderRadius: 125,
-        marginBottom: 40
+        marginBottom: 40,
+        overflow: "hidden",
     }
 });
 

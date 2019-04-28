@@ -17,7 +17,7 @@ type Product struct {
 	Images []string `json:"images"`
 }
 
-func main() {
+func main() {+
 	r := gin.Default()
 	r.POST("/", func(c *gin.Context) {
 		url := c.PostForm("url")

@@ -112,7 +112,7 @@ class ThemeFour extends Component {
                 </TouchableOpacity>
             ),
             headerRight:(
-                <TouchableOpacity style={{ alignItems:'center', justifyContent: 'center', }} onPress={() => navigation.getParam('tap')}>
+                <TouchableOpacity style={{ alignItems:'center', justifyContent: 'center', }} onPress={navigation.getParam('tap')}>
                     <Icon type='MaterialCommunityIcons' name='check' style={{ fontSize: 32, color: "#fff", marginRight: 10 }}/>
                 </TouchableOpacity> 
             )
@@ -155,7 +155,6 @@ const styles = StyleSheet.create({
         color: '#000',
         backgroundColor: '#fff',
         fontWeight: '600',
-        fontSize: 16,
         padding: 8,
         borderColor: '#fff',
         fontSize: 18
@@ -163,7 +162,8 @@ const styles = StyleSheet.create({
     priceContainer: {
         bottom: 0,
         position: 'absolute',
-        left: '35%'
+        left: '40%',
+        width: '20%'
     }
 });
 
