@@ -49,6 +49,7 @@ import { COLORS } from '../helper/CONSTANT';
                         renderItem={this.renderItem}
                         keyExtractor={(item, index) => item}
                         horizontal={true}
+                        showsHorizontalScrollIndicator={false}
                     />
                 </View>
             </Modal>
