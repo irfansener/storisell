@@ -17,7 +17,7 @@ type Product struct {
 	Images []string `json:"images"`
 }
 
-func main() {+
+func main() {
 	r := gin.Default()
 	r.POST("/", func(c *gin.Context) {
 		url := c.PostForm("url")
@@ -52,6 +52,9 @@ func checkHost(ur string) (Product, string) {
 	} else if u.Host == "m.trendyol.com" {
 		ur = strings.Replace(ur, "m", "www", 1)
 		product, err := parseTrendyol(ur)
+		return product, err
+	} else if u.Host == "iyzi.link" {
+		product, err := praseIyziLink(ur)
 		return product, err
 	}
 	return Product{}, ""
@@ -117,6 +120,39 @@ func parseTrendyol(url string) (Product, string) {
 		product.Images = append(product.Images, val)
 		secondImage := strings.Replace(val, "_1_org", "_2_org", 1)
 		product.Images = append(product.Images, secondImage)
+	}
+
+	fmt.Println(product)
+
+	return product, ""
+}
+
+func praseIyziLink(url string) (Product, string) {
+	// Request the HTML page.
+	res, err := http.Get(url)
+	if err != nil {
+		return Product{}, err.Error()
+	}
+	defer res.Body.Close()
+	if res.StatusCode != 200 {
+		return Product{}, "Errorr"
+	}
+
+	// Load the HTML document
+	doc, err := goquery.NewDocumentFromReader(res.Body)
+	if err != nil {
+		return Product{}, err.Error()
+	}
+	var product Product
+
+	product.Title = doc.Find(".product-detail h2").Text()
+	product.Price = doc.Find(".price").Text()
+
+	val, exist := doc.Find(".product-image").Attr("style")
+	firstParse := strings.Split(val, "url(")[1]
+	secondParse := strings.Split(firstParse, ");")[0]
+	if exist != false {
+		product.Images = append(product.Images, secondParse)
 	}
 
 	fmt.Println(product)
