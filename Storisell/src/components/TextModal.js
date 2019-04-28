@@ -46,12 +46,6 @@ export default @observer class ModalExample extends Component {
                 </TouchableOpacity>
               </View>
               <TextInput placeholder="Başlık Giriniz" placeholderTextColor='#3f434e' autoFocus style={styles.input} value={this.state.text} onChangeText={(text) => this.setState({ text: text.toUpperCase() })} />
-              <TouchableHighlight
-                onPress={() => {
-                  ModalStore.setEditTextModalVisible(false);
-                }}>
-                <Text>Hide Modal</Text>
-              </TouchableHighlight>
             </View>
           </View>
         </Modal>

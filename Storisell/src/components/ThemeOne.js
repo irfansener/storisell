@@ -1,7 +1,7 @@
 //import liraries
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import {observer} from 'mobx-react/native';
+import { observer } from 'mobx-react/native';
 import GlobalStore from '../stores/GlobalStore';
 
 // create a component
@@ -11,11 +11,11 @@ import GlobalStore from '../stores/GlobalStore';
             <TouchableOpacity activeOpacity={0.6} onPress={() => this.props.navigate('ThemeOne')} style={styles.container}>
                 <View style={styles.top}></View>
                 <View style={styles.center}>
-                <Text style={styles.title}>{GlobalStore.linkData.title}</Text>
-                <Image style={styles.image}  source={{url: GlobalStore.linkData.images[0]}}/>
-                <View style={styles.priceWrapper}>
-                    <Text style={styles.price}>{GlobalStore.linkData.price}</Text>
-                </View>
+                    <Text style={styles.title}>{GlobalStore.linkData.title}</Text>
+                    <Image style={styles.image} source={{ uri: GlobalStore.linkData.images[0] }} />
+                    <View style={styles.priceWrapper}>
+                        <Text style={styles.price}>{GlobalStore.linkData.price}</Text>
+                    </View>
                 </View>
                 <View style={styles.bottom}></View>
             </TouchableOpacity>
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         zIndex: 999,
         alignSelf: 'center',
         top: '10%',
-        left:'10%'
+        left: '10%'
     },
     priceWrapper: {
         backgroundColor: '#fee03f',

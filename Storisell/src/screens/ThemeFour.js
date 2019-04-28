@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, ImageBackground, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Platform, TouchableWithoutFeedback, CameraRoll, Alert, ImageBackground } from 'react-native';
 import GlobalStore from '../stores/GlobalStore';
 import ModalStore from '../stores/ModalStore';
 import { observer } from 'mobx-react/native';
@@ -8,6 +8,9 @@ import TextModal from '../components/TextModal';
 import SelectFonts from '../components/SelectFonts';
 import SelectColors from '../components/SelectColors';
 import Gestures from 'react-native-easy-gestures';
+import ViewShot from "react-native-view-shot";
+import Share from 'react-native-share';
+import { Root, ActionSheet, Icon } from 'native-base';
 
 
 class ThemeFour extends Component {
@@ -21,32 +24,86 @@ class ThemeFour extends Component {
     showModal() {
         ModalStore.setEditModalVisible(true);
     }
+    componentDidMount() {
+        this.props.navigation.setParams({ tap: this.tap })
+    }
+    tap = () => {
+        const BUTTONS = [
+            { text: "Share to Instagram", icon: "share", iconColor: "#f42ced" },
+            { text: "Save to gallery", icon: "download", iconColor: "#2c8ef4" },
+            { text: "Cancel", icon: "close", iconColor: "#ff0000" }
+        ];
+        ActionSheet.show(
+            {
+                options: BUTTONS,
+                cancelButtonIndex: 2,
+                title: "Do the last touch"
+            },
+            buttonIndex => {
+                if (buttonIndex === 0)
+                    this.share();
+                else if (buttonIndex === 1)
+                    this.save()
+            }
+        )
+    }
+    share = () => {
+        this.refs.viewShot.capture().then(async (uri) => {
+            let shareImage = {
+                title: "Story maker for storisell",
+                message: "",
+                url: Platform.OS == 'android' ? 'file://' + uri : uri,
+                subject: "Share Link" //  for email
+            };
+            Share.open(shareImage)
+            console.log("do something with ", uri);
+        });
+    }
+    save = () => {
+        this.refs.viewShot.capture().then(async (uri) => {
+            CameraRoll.saveToCameraRoll(uri);
+            Alert.alert('Done!', 'Your story has been saved with successfully!');
+        });
+    }
+
     render() {
         return (
-            <ImageBackground source={{ uri: GlobalStore.linkData.images[0] }} style={styles.container}>
-                <TextModal visible={this.state.visible} parentState={this} />
-                <SelectFonts parentState={this} />
-                <SelectColors parentState={this} />
-                <View style={styles.border}>
-                    <Gestures>
-                        <TouchableWithoutFeedback onLongPress={() => this.showModal("title")}>
-                            <Text style={[styles.title, this.state.font && { fontFamily: this.state.font }, this.state.color && { color: this.state.color }]}>
-                                {this.state.title}
-                            </Text>
-                        </TouchableWithoutFeedback>
-                    </Gestures>
-                    <View style={styles.priceContainer}>
-                        <Gestures>
-                            <TouchableWithoutFeedback >
-                                <Text style={[styles.price, this.state.font && { fontFamily: this.state.font }, this.state.color && { color: this.state.color }]}>
-                                    {GlobalStore.linkData.price}
-                                </Text>
-                            </TouchableWithoutFeedback>
-                        </Gestures>
-                    </View>
-                </View>
-            </ImageBackground>
+            <Root>
+                <ViewShot ref="viewShot" style={styles.container} options={{ format: "jpg", quality: 0.9, width: 1080, height: 1920 }}>
+                    <ImageBackground source={{ uri: GlobalStore.linkData.images[0] }} style={styles.container}>
+                        <TextModal visible={this.state.visible} parentState={this} />
+                        <SelectFonts parentState={this} />
+                        <SelectColors parentState={this} />
+                        <View style={styles.border}>
+                            <Gestures>
+                                <TouchableWithoutFeedback onLongPress={() => this.showModal("title")}>
+                                    <Text style={[styles.title, this.state.font && { fontFamily: this.state.font }, this.state.color && { color: this.state.color }]}>
+                                        {this.state.title}
+                                    </Text>
+                                </TouchableWithoutFeedback>
+                            </Gestures>
+                            <View style={styles.priceContainer}>
+                                <Gestures>
+                                    <TouchableWithoutFeedback >
+                                        <Text style={[styles.price, this.state.font && { fontFamily: this.state.font }, this.state.color && { color: this.state.color }]}>
+                                            {GlobalStore.linkData.price}
+                                        </Text>
+                                    </TouchableWithoutFeedback>
+                                </Gestures>
+                            </View>
+                        </View>
+                    </ImageBackground>
+                </ViewShot>
+            </Root>
         );
+    }
+    static navigationOptions = ({ navigation }) => {
+        return {
+            headerRight:
+                <TouchableOpacity style={{ paddingRight: 8, alignItems: 'center', justifyContent: 'center', }} onPress={navigation.getParam('tap')}>
+                    <Icon type='MaterialCommunityIcons' name='check' style={{ fontSize: 32 }} />
+                </TouchableOpacity>
+        }
     }
 }
 

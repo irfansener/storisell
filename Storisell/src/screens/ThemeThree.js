@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, TouchableWithoutFeedback, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Platform, TouchableWithoutFeedback, CameraRoll, Alert, Dimensions } from 'react-native';
 import { observer } from 'mobx-react/native';
 import GlobalStore from '../stores/GlobalStore';
 import ModalStore from '../stores/ModalStore';
@@ -8,6 +8,9 @@ import TextModal from '../components/TextModal';
 import Gestures from 'react-native-easy-gestures';
 import SelectFonts from '../components/SelectFonts';
 import SelectColors from '../components/SelectColors';
+import ViewShot from "react-native-view-shot";
+import Share from 'react-native-share';
+import { Root, ActionSheet, Icon } from 'native-base';
 
 const window = Dimensions.get("window");
 
@@ -26,32 +29,87 @@ const window = Dimensions.get("window");
         });
         ModalStore.setEditModalVisible(true, type);
     }
+    componentDidMount() {
+        this.props.navigation.setParams({ tap: this.tap })
+    }
+    tap = () => {
+        const BUTTONS = [
+            { text: "Share to Instagram", icon: "share", iconColor: "#f42ced" },
+            { text: "Save to gallery", icon: "download", iconColor: "#2c8ef4" },
+            { text: "Cancel", icon: "close", iconColor: "#ff0000" }
+        ];
+        ActionSheet.show(
+            {
+                options: BUTTONS,
+                cancelButtonIndex: 2,
+                title: "Do the last touch"
+            },
+            buttonIndex => {
+                if (buttonIndex === 0)
+                    this.share();
+                else if (buttonIndex === 1)
+                    this.save()
+            }
+        )
+    }
+    share = () => {
+        this.refs.viewShot.capture().then(async (uri) => {
+            let shareImage = {
+                title: "Story maker for storisell",
+                message: "",
+                url: Platform.OS == 'android' ? 'file://' + uri : uri,
+                subject: "Share Link" //  for email
+            };
+            Share.open(shareImage)
+            console.log("do something with ", uri);
+        });
+    }
+    save = () => {
+        this.refs.viewShot.capture().then(async (uri) => {
+            CameraRoll.saveToCameraRoll(uri);
+            Alert.alert('Done!', 'Your story has been saved with successfully!');
+        });
+    }
 
     render() {
         return (
-            <View style={styles.container}>
-                <TextModal visible={this.state.visible} parentState={this} />
-                <SelectFonts parentState={this} />
-                <SelectColors parentState={this} />
-                <Gestures style={styles.titleWrapper}>
-                    <TouchableWithoutFeedback onLongPress={() => this.showModal("title")}>
-                        <Text style={[styles.title, this.state.font && { fontFamily: this.state.font }, this.state.color && { color: this.state.color }]}>
-                            {this.state.title}
-                        </Text>
-                    </TouchableWithoutFeedback>
-                </Gestures>
-                <TouchableWithoutFeedback onLongPress={() => this.showModal("promotion")}>
-                    <Text style={[styles.sideText, this.state.font && { fontFamily: this.state.font }, this.state.color && { color: this.state.color }]}>{this.state.promotion}</Text>
-                </TouchableWithoutFeedback>
-                <Image style={styles.image} source={{ uri: GlobalStore.linkData.images[0] }} />
-                <View style={styles.imageBackground}></View>
-                <Gestures>
-                    <TouchableWithoutFeedback >
-                        <Text style={[styles.price, this.state.font && { fontFamily: this.state.font }, this.state.color && { color: this.state.color }]}>{GlobalStore.linkData.price}</Text>
-                    </TouchableWithoutFeedback>
-                </Gestures>
-            </View>
+            <Root>
+                <ViewShot ref="viewShot" style={styles.container} options={{ format: "jpg", quality: 0.9, width: 1080, height: 1920 }}>
+                    <View style={styles.container}>
+                        <TextModal visible={this.state.visible} parentState={this} />
+                        <SelectFonts parentState={this} />
+                        <SelectColors parentState={this} />
+                        <View style={styles.titleWrapper}>
+                            <Gestures>
+                                <TouchableWithoutFeedback onLongPress={() => this.showModal("title")}>
+                                    <Text style={[styles.title, this.state.font && { fontFamily: this.state.font }, this.state.color && { color: this.state.color }]}>
+                                        {this.state.title}
+                                    </Text>
+                                </TouchableWithoutFeedback>
+                            </Gestures>
+                        </View>
+                        <TouchableWithoutFeedback onLongPress={() => this.showModal("promotion")}>
+                            <Text style={[styles.sideText, this.state.font && { fontFamily: this.state.font }, this.state.color && { color: this.state.color }]}>{this.state.promotion}</Text>
+                        </TouchableWithoutFeedback>
+                        <Image style={styles.image} source={{ uri: GlobalStore.linkData.images[0] }} />
+                        <View style={styles.imageBackground}></View>
+                        <Gestures>
+                            <TouchableWithoutFeedback >
+                                <Text style={[styles.price, this.state.font && { fontFamily: this.state.font }, this.state.color && { color: this.state.color }]}>{GlobalStore.linkData.price}</Text>
+                            </TouchableWithoutFeedback>
+                        </Gestures>
+                    </View>
+                </ViewShot>
+            </Root>
         );
+    }
+    static navigationOptions = ({ navigation }) => {
+        return {
+            headerRight:
+                <TouchableOpacity style={{ paddingRight: 8, alignItems: 'center', justifyContent: 'center', }} onPress={navigation.getParam('tap')}>
+                    <Icon type='MaterialCommunityIcons' name='check' style={{ fontSize: 32 }} />
+                </TouchableOpacity>
+        }
     }
 }
 

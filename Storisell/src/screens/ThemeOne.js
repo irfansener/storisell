@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, Platform, TouchableWithoutFeedback, CameraRoll } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Platform, TouchableWithoutFeedback, CameraRoll, Alert } from 'react-native';
 import { observer } from 'mobx-react/native';
 import GlobalStore from '../stores/GlobalStore';
 import ModalStore from '../stores/ModalStore';
@@ -10,6 +10,7 @@ import SelectFonts from '../components/SelectFonts';
 import SelectColors from '../components/SelectColors';
 import ViewShot from "react-native-view-shot";
 import Share from 'react-native-share';
+import { Root, ActionSheet, Icon } from 'native-base';
 
 
 @observer class ThemeOne extends Component {
@@ -24,10 +25,30 @@ import Share from 'react-native-share';
         ModalStore.setEditModalVisible(true);
     }
     componentDidMount() {
-        this.props.navigation.setParams({ save: this.save })
+        this.props.navigation.setParams({ tap: this.tap })
     }
-    save = () => {
-        this.refs.viewShot.capture({ width: 1080, height: 1920 }).then(async (uri) => {
+    tap = () => {
+        const BUTTONS = [
+            { text: "Share to Instagram", icon: "share", iconColor: "#f42ced" },
+            { text: "Save to gallery", icon: "download", iconColor: "#2c8ef4" },
+            { text: "Cancel", icon: "close", iconColor: "#ff0000" }
+        ];
+        ActionSheet.show(
+            {
+                options: BUTTONS,
+                cancelButtonIndex: 2,
+                title: "Do the last touch"
+            },
+            buttonIndex => {
+                if (buttonIndex === 0)
+                    this.share();
+                else if (buttonIndex === 1)
+                    this.save()
+            }
+        )
+    }
+    share = () => {
+        this.refs.viewShot.capture().then(async (uri) => {
             let shareImage = {
                 title: "Story maker for storisell",
                 message: "",
@@ -38,33 +59,44 @@ import Share from 'react-native-share';
             console.log("do something with ", uri);
         });
     }
+    save = () => {
+        this.refs.viewShot.capture().then(async (uri) => {
+            CameraRoll.saveToCameraRoll(uri);
+            Alert.alert('Done!', 'Your story has been saved with successfully!');
+        });
+    }
     render() {
         return (
-            <ViewShot ref="viewShot" style={styles.container} options={{ format: "jpg", quality: 0.9 }}>
-                <TextModal visible={this.state.visible} parentState={this} />
-                <SelectFonts parentState={this} />
-                <SelectColors parentState={this} />
-                <View style={styles.top}></View>
-                <View style={styles.center}>
-                    <Gestures>
-                        <TouchableWithoutFeedback onLongPress={() => this.showModal("title")}>
-                            <Text style={[styles.title, this.state.font && { fontFamily: this.state.font }, this.state.color && { color: this.state.color }]}>{this.state.title}</Text>
-                        </TouchableWithoutFeedback>
-                    </Gestures>
-                    <Image style={styles.image} source={{ url: GlobalStore.linkData.images[0] }} />
-                    <Gestures>
-                        <View style={styles.priceWrapper}>
-                            <Text style={[styles.price, this.state.font && { fontFamily: this.state.font }, this.state.color && { color: this.state.color }]}>{GlobalStore.linkData.price}</Text>
-                        </View>
-                    </Gestures>
-                </View>
-                <View style={styles.bottom}></View>
-            </ViewShot>
+            <Root>
+                <ViewShot ref="viewShot" style={styles.container} options={{ format: "jpg", quality: 0.9, width: 1080, height: 1920 }}>
+                    <TextModal visible={this.state.visible} parentState={this} />
+                    <SelectFonts parentState={this} />
+                    <SelectColors parentState={this} />
+                    <View style={styles.top}></View>
+                    <View style={styles.center}>
+                        <Gestures>
+                            <TouchableWithoutFeedback onLongPress={() => this.showModal("title")}>
+                                <Text style={[styles.title, this.state.font && { fontFamily: this.state.font }, this.state.color && { color: this.state.color }]}>{this.state.title}</Text>
+                            </TouchableWithoutFeedback>
+                        </Gestures>
+                        <Image style={styles.image} source={{ uri: GlobalStore.linkData.images[0] }} />
+                        <Gestures>
+                            <View style={styles.priceWrapper}>
+                                <Text style={[styles.price, this.state.font && { fontFamily: this.state.font }, this.state.color && { color: this.state.color }]}>{GlobalStore.linkData.price}</Text>
+                            </View>
+                        </Gestures>
+                    </View>
+                    <View style={styles.bottom}></View>
+                </ViewShot>
+            </Root>
         );
     }
     static navigationOptions = ({ navigation }) => {
         return {
-            headerRight: <TouchableOpacity style={{ padding: 10 }} onPress={navigation.getParam('save')}><Text style={{ fontSize: 18 }}>Save</Text></TouchableOpacity>
+            headerRight:
+                <TouchableOpacity style={{ paddingRight: 8, alignItems:'center', justifyContent: 'center', }} onPress={navigation.getParam('tap')}>
+                    <Icon type='MaterialCommunityIcons' name='check' style={{ fontSize: 32 }} />
+                </TouchableOpacity>
         }
     }
 }
