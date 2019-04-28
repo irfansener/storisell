@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity, TextInput, TouchableWithoutFeedback } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity, Platform, TouchableWithoutFeedback, CameraRoll } from 'react-native';
 import { observer } from 'mobx-react/native';
 import GlobalStore from '../stores/GlobalStore';
 import ModalStore from '../stores/ModalStore';
@@ -8,6 +8,8 @@ import TextModal from '../components/TextModal';
 import Gestures from 'react-native-easy-gestures';
 import SelectFonts from '../components/SelectFonts';
 import SelectColors from '../components/SelectColors';
+import ViewShot from "react-native-view-shot";
+import Share from 'react-native-share';
 
 
 @observer class ThemeOne extends Component {
@@ -21,9 +23,24 @@ import SelectColors from '../components/SelectColors';
     showModal() {
         ModalStore.setEditModalVisible(true);
     }
+    componentDidMount() {
+        this.props.navigation.setParams({ save: this.save })
+    }
+    save = () => {
+        this.refs.viewShot.capture({ width: 1080, height: 1920 }).then(async (uri) => {
+            let shareImage = {
+                title: "Story maker for storisell",
+                message: "",
+                url: Platform.OS == 'android' ? 'file://' + uri : uri,
+                subject: "Share Link" //  for email
+            };
+            Share.open(shareImage)
+            console.log("do something with ", uri);
+        });
+    }
     render() {
         return (
-            <View style={styles.container}>
+            <ViewShot ref="viewShot" style={styles.container} options={{ format: "jpg", quality: 0.9 }}>
                 <TextModal visible={this.state.visible} parentState={this} />
                 <SelectFonts parentState={this} />
                 <SelectColors parentState={this} />
@@ -42,8 +59,13 @@ import SelectColors from '../components/SelectColors';
                     </Gestures>
                 </View>
                 <View style={styles.bottom}></View>
-            </View>
+            </ViewShot>
         );
+    }
+    static navigationOptions = ({ navigation }) => {
+        return {
+            headerRight: <TouchableOpacity style={{ padding: 10 }} onPress={navigation.getParam('save')}><Text style={{ fontSize: 18 }}>Save</Text></TouchableOpacity>
+        }
     }
 }
 
