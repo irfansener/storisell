@@ -13,7 +13,8 @@ import SelectFonts from '../components/SelectFonts';
     state = {
         visible: false,
         title: GlobalStore.linkData.title.toUpperCase(),
-        type: 'title'
+        type: 'title',
+        font: null
     }
     showModal() {
         this.setState({ visible: true });
@@ -32,11 +33,11 @@ import SelectFonts from '../components/SelectFonts';
                     />
                     <Gestures style={styles.titleWrapper}>
                         <TouchableWithoutFeedback onLongPress={() => this.showModal('title')}>
-                            <Text style={styles.title}>{this.state.title}</Text>
+                            <Text style={[styles.title, this.state.font && { fontFamily: this.state.font }]}>{this.state.title}</Text>
                         </TouchableWithoutFeedback>
                     </Gestures>
                     <Gestures>
-                        <Text style={styles.price}>{GlobalStore.linkData.price}</Text>
+                        <Text style={[styles.price, this.state.font && { fontFamily: this.state.font }]}>{GlobalStore.linkData.price}</Text>
                     </Gestures>
                 </View>
             </View>

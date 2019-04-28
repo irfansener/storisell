@@ -15,11 +15,12 @@ const window = Dimensions.get("window");
         visible: false,
         title: GlobalStore.linkData.title.toUpperCase(),
         promotion: '10-20% Indirsdsdsdim',
-        type: 'title'
+        type: 'title',
+        font: null
     }
     showModal(type) {
-        this.setState({type}, () => {
-            this.setState({visible: true})
+        this.setState({ type }, () => {
+            this.setState({ visible: true })
         });
         ModalStore.setEditModalVisible(true, type);
     }
@@ -31,19 +32,19 @@ const window = Dimensions.get("window");
                 <SelectFonts parentState={this} />
                 <Gestures style={styles.titleWrapper}>
                     <TouchableWithoutFeedback onLongPress={() => this.showModal("title")}>
-                        <Text style={styles.title}>
+                        <Text style={[styles.title, this.state.font && { fontFamily: this.state.font }]}>
                             {this.state.title}
                         </Text>
                     </TouchableWithoutFeedback>
                 </Gestures>
-                <TouchableWithoutFeedback  onLongPress={() => this.showModal("promotion")}>
-                    <Text style={styles.sideText}>{this.state.promotion}</Text>
+                <TouchableWithoutFeedback onLongPress={() => this.showModal("promotion")}>
+                    <Text style={[styles.sideText, this.state.font && { fontFamily: this.state.font }]}>{this.state.promotion}</Text>
                 </TouchableWithoutFeedback>
                 <Image style={styles.image} source={{ uri: GlobalStore.linkData.images[0] }} />
                 <View style={styles.imageBackground}></View>
                 <Gestures>
                     <TouchableWithoutFeedback >
-                        <Text style={styles.price}>{GlobalStore.linkData.price}</Text>
+                        <Text style={[styles.price, this.state.font && { fontFamily: this.state.font }]}>{GlobalStore.linkData.price}</Text>
                     </TouchableWithoutFeedback>
                 </Gestures>
             </View>

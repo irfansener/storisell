@@ -13,7 +13,8 @@ import SelectFonts from '../components/SelectFonts';
     state = {
         title: GlobalStore.linkData.title.toUpperCase(),
         visible: false,
-        type: 'title'
+        type: 'title',
+        font: null
     }
     showModal() {
         ModalStore.setEditModalVisible(true);
@@ -27,13 +28,13 @@ import SelectFonts from '../components/SelectFonts';
                 <View style={styles.center}>
                     <Gestures>
                         <TouchableWithoutFeedback onLongPress={() => this.showModal("title")}>
-                            <Text style={styles.title}>{this.state.title}</Text>
+                            <Text style={[styles.title, this.state.font && { fontFamily: this.state.font }]}>{this.state.title}</Text>
                         </TouchableWithoutFeedback>
                     </Gestures>
                     <Image style={styles.image} source={{ url: GlobalStore.linkData.images[0] }} />
                     <Gestures>
                         <View style={styles.priceWrapper}>
-                            <Text style={styles.price}>{GlobalStore.linkData.price}</Text>
+                            <Text style={[styles.price, this.state.font && { fontFamily: this.state.font }]}>{GlobalStore.linkData.price}</Text>
                         </View>
                     </Gestures>
                 </View>

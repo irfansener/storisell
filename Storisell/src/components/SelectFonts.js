@@ -41,6 +41,14 @@ import { FONT_NAMES } from '../helper/CONSTANT';
                 style={styles.bottomModal}
             >
                 <View style={styles.container}>
+                    <View style={styles.header}>
+                        <TouchableOpacity onPress={() => { this.select(null, null); ModalStore.setSelectedFontModalVisible(false) }}>
+                            <Icon style={styles.checkIcon} type='Ionicons' name='md-close' />
+                        </TouchableOpacity>
+                        <TouchableOpacity onPress={() => ModalStore.setSelectedFontModalVisible(false)}>
+                            <Icon style={styles.checkIcon} type='FontAwesome5' name='check' />
+                        </TouchableOpacity>
+                    </View>
                     <FlatList
                         data={FONT_NAMES}
                         extraData={this.state}
@@ -57,12 +65,19 @@ import { FONT_NAMES } from '../helper/CONSTANT';
 // define your styles
 const styles = StyleSheet.create({
     container: {
-        padding: 25,
+        paddingTop: 5,
+        paddingBottom: 25,
         paddingRight: 5,
         paddingLeft: 5,
         backgroundColor: "#fff",
         alignItems: "center",
         borderRadius: 4,
+    },
+    header: {
+        width: '100%',
+        height: 50,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
     },
     bottomModal: {
         justifyContent: "flex-end",
@@ -81,6 +96,10 @@ const styles = StyleSheet.create({
     },
     itemText: {
         fontSize: 21
+    },
+    checkIcon: {
+        fontSize: 24,
+        padding: 10
     }
 });
 
