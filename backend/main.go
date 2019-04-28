@@ -18,8 +18,6 @@ type Product struct {
 }
 
 func main() {
-	checkHost("https://www.shopier.com/ShowProductNew/products.php?id=651370")
-
 	r := gin.Default()
 	r.POST("/", func(c *gin.Context) {
 		url := c.PostForm("url")
@@ -48,7 +46,11 @@ func checkHost(ur string) (Product, string) {
 	if u.Host == "www.shopier.com" {
 		product, err := parseShopier(ur)
 		return product, err
-	} else if u.Host == "www.trendyol.com" {
+	} else if u.Host == "www.trendyol.com" || u.Host == "ty.gl" {
+		product, err := parseTrendyol(ur)
+		return product, err
+	} else if u.Host == "m.trendyol.com" {
+		ur = strings.Replace(ur, "m", "www", 1)
 		product, err := parseTrendyol(ur)
 		return product, err
 	}
