@@ -6,6 +6,7 @@ import ModalStore from '../stores/ModalStore';
 import { observer } from 'mobx-react/native';
 import Gestures from 'react-native-easy-gestures';
 import TextModal from '../components/TextModal';
+import SelectFonts from '../components/SelectFonts';
 
 
 @observer class ThemeTwo extends Component {
@@ -16,13 +17,14 @@ import TextModal from '../components/TextModal';
     }
     showModal() {
         this.setState({ visible: true });
-        ModalStore.setEditTextModalVisible(true);
+        ModalStore.setEditModalVisible(true);
     }
 
     render() {
         return (
             <View style={styles.container}>
                 <TextModal visible={this.state.visible} parentState={this} />
+                <SelectFonts parentState={this} />
                 <View style={styles.imageContainer}>
                     <Image
                         source={{ uri: GlobalStore.linkData.images[0] }}

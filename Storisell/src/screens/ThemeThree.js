@@ -6,6 +6,7 @@ import GlobalStore from '../stores/GlobalStore';
 import ModalStore from '../stores/ModalStore';
 import TextModal from '../components/TextModal';
 import Gestures from 'react-native-easy-gestures';
+import SelectFonts from '../components/SelectFonts';
 
 const window = Dimensions.get("window");
 
@@ -20,13 +21,14 @@ const window = Dimensions.get("window");
         this.setState({type}, () => {
             this.setState({visible: true})
         });
-        ModalStore.setEditTextModalVisible(true, type);
+        ModalStore.setEditModalVisible(true, type);
     }
 
     render() {
         return (
             <View style={styles.container}>
                 <TextModal visible={this.state.visible} parentState={this} />
+                <SelectFonts parentState={this} />
                 <Gestures style={styles.titleWrapper}>
                     <TouchableWithoutFeedback onLongPress={() => this.showModal("title")}>
                         <Text style={styles.title}>

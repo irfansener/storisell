@@ -2,8 +2,10 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, ImageBackground, TouchableWithoutFeedback } from 'react-native';
 import GlobalStore from '../stores/GlobalStore';
+import ModalStore from '../stores/ModalStore';
 import { observer } from 'mobx-react/native';
 import TextModal from '../components/TextModal';
+import SelectFonts from '../components/SelectFonts';
 import Gestures from 'react-native-easy-gestures';
 
 
@@ -11,19 +13,21 @@ class ThemeFour extends Component {
     state = {
         visible: false,
         title: GlobalStore.linkData.title.toUpperCase(),
-        type: 'title'
+        type: 'title',
+        font: null,
     }
     showModal() {
-        this.setState({ visible: true });
+        ModalStore.setEditModalVisible(true);
     }
     render() {
         return (
             <ImageBackground source={{ uri: GlobalStore.linkData.images[0] }} style={styles.container}>
                 <TextModal visible={this.state.visible} parentState={this} />
+                <SelectFonts parentState={this} />
                 <View style={styles.border}>
                     <Gestures>
                         <TouchableWithoutFeedback onLongPress={() => this.showModal("title")}>
-                            <Text style={styles.title}>
+                            <Text style={[styles.title, this.state.font && { fontFamily: this.state.font }]}>
                                 {this.state.title}
                             </Text>
                         </TouchableWithoutFeedback>
@@ -31,7 +35,7 @@ class ThemeFour extends Component {
                     <View style={styles.priceContainer}>
                         <Gestures>
                             <TouchableWithoutFeedback >
-                                <Text style={styles.price}>
+                                <Text style={[styles.price, this.state.font && { fontFamily: this.state.font }]}>
                                     {GlobalStore.linkData.price}
                                 </Text>
                             </TouchableWithoutFeedback>
@@ -62,7 +66,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         color: '#000',
         padding: 10,
-        width: '50%',
+        width: '55%',
         position: 'absolute',
         top: 0,
         left: '25%',

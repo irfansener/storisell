@@ -5,16 +5,18 @@ import ThemeOne from '../components/ThemeOne';
 import ThemeTwo from '../components/ThemeTwo';
 import ThemeThree from '../components/ThemeThree';
 import ThemeFour from '../components/ThemeFour';
+import EditModalIndex from '../components/EditModalIndex'
 
 class Themes extends Component {
     render() {
         return (
             <View style={styles.container}>
+                <EditModalIndex />
                 <ThemeOne navigate={this.props.navigation.navigate} />
                 <ThemeTwo navigate={this.props.navigation.navigate} />
                 <ThemeThree navigate={this.props.navigation.navigate} />
                 <ThemeFour navigate={this.props.navigation.navigate} />
-            </View >
+            </View>
         );
     }
     static navigationOptions = {

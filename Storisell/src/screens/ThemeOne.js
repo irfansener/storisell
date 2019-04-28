@@ -6,6 +6,7 @@ import GlobalStore from '../stores/GlobalStore';
 import ModalStore from '../stores/ModalStore';
 import TextModal from '../components/TextModal';
 import Gestures from 'react-native-easy-gestures';
+import SelectFonts from '../components/SelectFonts';
 
 
 @observer class ThemeOne extends Component {
@@ -15,12 +16,13 @@ import Gestures from 'react-native-easy-gestures';
         type: 'title'
     }
     showModal() {
-        ModalStore.setEditTextModalVisible(true);
+        ModalStore.setEditModalVisible(true);
     }
     render() {
         return (
             <View style={styles.container}>
                 <TextModal visible={this.state.visible} parentState={this} />
+                <SelectFonts parentState={this} />
                 <View style={styles.top}></View>
                 <View style={styles.center}>
                     <Gestures>
